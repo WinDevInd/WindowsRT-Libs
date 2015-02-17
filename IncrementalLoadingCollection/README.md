@@ -39,7 +39,8 @@ Incremental Loading ready with Observable-Collection, Observable-List, Observabl
                     return _bookDataContext.hasMore;
                 }
         }
-
+        
+        ////Your View-Model which contain the IncrementalLoadingCollection
         public class BookDataVM
         {
             BookSearchDataContext data;
