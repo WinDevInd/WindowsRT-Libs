@@ -2,6 +2,7 @@
 Incremental Loading ready with Observable-Collection, Observable-List, ObservableDictionary
 
 # Example
+
 public class BookCollection : IncrementalLoadingList<BookSummaryInfo>
     {
         private BookSearchDataContext _bookDataContext;
