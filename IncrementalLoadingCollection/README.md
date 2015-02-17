@@ -21,17 +21,18 @@ public class BookCollection : IncrementalLoadingList<BookSummaryInfo>
                 _currentpage++;
                 if (response != null && response.Search != null && response.Search.Length > 0)
                 {
-                    List<BookSummaryInfo> bookSummaryInfo = new List<BookSummaryInfo>();
                     foreach (var bookinfo in response.Search)
                     {
+                        //Add data to Collection
                         this.Add(new BookSummaryInfo(bookinfo));
                     }
-                    return bookSummaryInfo.Count;
+                    //return the no of items added
+                    return response.Search.Length;
                 }
             }
             return 0;
         }
-
+        
         protected override bool CanLoadMoreItems()
         {
             ////your Own logic or network can tell if you have more items
@@ -50,10 +51,5 @@ public class BookCollection : IncrementalLoadingList<BookSummaryInfo>
             BookCollection = new BookCollection(data);
         }
     }  
-      
-      # Test Example coming soon in Repo
 
-
-
-
-# Documentation is Coming Soon....
+# Test Example coming soon in Repo
