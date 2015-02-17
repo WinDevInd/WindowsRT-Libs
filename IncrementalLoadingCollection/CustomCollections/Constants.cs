@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TJI.IL.Collection.CustomCollections
+namespace JISoft.Collections.CustomCollections
 {
     internal enum CollectionChangedAction
     {

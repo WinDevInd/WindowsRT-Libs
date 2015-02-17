@@ -3,7 +3,7 @@
 // MS-Pl licensed 
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace TJI.IL.Collection
+namespace JISoft.Collections.ILCollections
 {
     using System;    
     using System.Collections.Generic;
@@ -65,7 +65,7 @@ namespace TJI.IL.Collection
         /// </summary>
         /// <param name="count">No of item to load at a time</param>
         /// <returns>The wrapped results of the load operation</returns>        
-        protected abstract Task<ObservableCollection<T>> LoadNextItemsAsync(int count);
+        protected abstract Task<int> LoadNextItemsAsync(int count);
 
         /// <summary>
         /// Overridable Method - Gets a value indicating whether Collection can load more item
@@ -86,16 +86,8 @@ namespace TJI.IL.Collection
         {
             try
             {
-                var items = await this.LoadNextItemsAsync(count);
-                if (items != null)
-                {
-                    foreach (var item in items)
-                    {
-                        this.Add(item);
-                    }
-                }
-
-                return new LoadMoreItemsResult { Count = (uint)items.Count };
+                var items = await this.LoadNextItemsAsync(count);                              
+                return new LoadMoreItemsResult { Count = (uint)items };
             }
             finally
             {

@@ -1,11 +1,12 @@
 ﻿//----------------------------------------------------------------------------------------------
-// <copyright file="IncrementalLoadingDictionary.cs" company="TJInnoation" Owner="Jaykumar K Daftary">
+// <copyright file="IncrementalLoadingList.cs" company="TJInnoation" Owner="Jaykumar K Daftary">
 // MS-Pl licensed 
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace TJI.IL.Collection
+namespace JISoft.Collections.ILCollections
 {
-    using System;    
+    using JISoft.Collections.CustomCollections;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,7 +22,7 @@ namespace TJI.IL.Collection
     /// ObservableCollection with Incremental loading support
     /// </summary>
     /// <typeparam name="T">Expecting type</typeparam>
-    public abstract class IncrementalLoadingDictionary<K,T> : Dictionary<K,T>, ISupportIncrementalLoading
+    public abstract class IncrementalLoadingList<T> : ObservableList<T>, ISupportIncrementalLoading
     {
         /// <summary>
         /// Indicating whether thread is busy operation.
@@ -36,7 +37,7 @@ namespace TJI.IL.Collection
         public bool HasMoreItems
         {
             get { return this.CanLoadMoreItems(); }
-        }       
+        }
 
         /// <summary>
         /// Wrapper method - Load more item asynchronously
@@ -56,7 +57,7 @@ namespace TJI.IL.Collection
             }
         }
 
-        #endregion       
+        #endregion
 
         #region Overridables method
 
@@ -65,13 +66,13 @@ namespace TJI.IL.Collection
         /// </summary>
         /// <param name="count">No of item to load at a time</param>
         /// <returns>The wrapped results of the load operation</returns>        
-        protected abstract Task<Dictionary<K,T>> LoadNextItemsAsync(int count);
+        protected abstract Task<int> LoadNextItemsAsync(int count);
 
         /// <summary>
         /// Overridable Method - Gets a value indicating whether Collection can load more item
         /// </summary>
         /// <returns>Returns the value indicating whether collection can load more item</returns>
-        protected abstract bool CanLoadMoreItems();        
+        protected abstract bool CanLoadMoreItems();
 
         #endregion
 
@@ -87,15 +88,7 @@ namespace TJI.IL.Collection
             try
             {
                 var items = await this.LoadNextItemsAsync(count);
-                if (items != null)
-                {
-                    foreach (var item in items)
-                    {
-                        this.Add(item.Key,item.Value);
-                    }
-                }
-
-                return new LoadMoreItemsResult { Count = (uint)items.Count };
+                return new LoadMoreItemsResult { Count = (uint)items };
             }
             finally
             {

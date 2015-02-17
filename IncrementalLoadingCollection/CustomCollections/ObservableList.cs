@@ -4,8 +4,8 @@
 // MS-Pl licensed 
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace TJI.IL.Collection.CustomCollections
-{
+namespace JISoft.Collections.CustomCollections
+{    
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
@@ -118,7 +118,7 @@ namespace TJI.IL.Collection.CustomCollections
             base.Reverse(start, count);
             RaiseCollectionChanged(CollectionChangedAction.Reset);
         }
-
+        
         /// <summary>
         /// Replace the item at spacified index which raise the Collection change event
         /// </summary>

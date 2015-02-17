@@ -8,7 +8,7 @@
     <ProjectGuid>{76001606-53A0-4AC9-9EF5-8EF0E023B89F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IncrementalLoadingCollections</RootNamespace>
+    <RootNamespace>JISoft.Collections</RootNamespace>
     <AssemblyName>IncrementalLoadingCollections</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
     <TargetPlatform Include="Windows, Version=8.1" />
@@ -40,10 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomCollections\Constants.cs" />
-    <Compile Include="CustomCollections\ObservableDictionary.cs" />
-    <Compile Include="IncrementalLoadingCollection.cs" />
-    <Compile Include="IncrementalLoadingDictionary.cs" />
-    <Compile Include="IncrementalLoadingList.cs" />
+    <Compile Include="ILCollections\IncrementalLoadingCollection.cs" />
+    <Compile Include="ILCollections\IncrementalLoadingList.cs" />
     <Compile Include="CustomCollections\ObservableList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
