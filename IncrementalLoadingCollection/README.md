@@ -54,3 +54,4 @@ Incremental Loading ready with Observable-Collection, Observable-List, Observabl
         }  
 
 # Test Example coming soon in Repo
+# Feel free to send me the issues or create pull request for changes you want for library...
