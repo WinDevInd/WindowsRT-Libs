@@ -88,7 +88,6 @@ namespace JISoft.Collections.ILCollections
             try
             {
                 var items = await this.LoadNextItemsAsync(count);
-                isBusy = false;
                 return new LoadMoreItemsResult { Count = (uint)items };
             }
             catch (Exception e)
