@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------------------------
-// <copyright file="ObservableList.cs" company="TJInnoation" Owner="Jaykumar K Daftary">
+// <copyright file="ObservableList.cs" company="JISoft" Owner="Jaykumar K Daftary">
 // Copyright (c) TJInnoation.  All rights reserved.
 // MS-Pl licensed 
 // </copyright>

@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------------------------
-// <copyright file="IncrementalLoadingList.cs" company="TJInnoation" Owner="Jaykumar K Daftary">
+// <copyright file="IncrementalLoadingList.cs" company="JISoft" Owner="Jaykumar K Daftary">
 // MS-Pl licensed 
 // </copyright>
 //-------------------------------------------------------------------------------------------------
@@ -88,7 +88,12 @@ namespace JISoft.Collections.ILCollections
             try
             {
                 var items = await this.LoadNextItemsAsync(count);
+                isBusy = false;
                 return new LoadMoreItemsResult { Count = (uint)items };
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
             finally
             {
