@@ -1,6 +1,8 @@
 # IncrementalLoadingCollection
 Incremental Loading ready with Observable-Collection, Observable-List, ObservableDictionary
 
+http://windowsphonelearning.blogspot.com/2015/02/incrementalloading-in-windows-phone-81.html
+
 # Example
 
     public class BookCollection : IncrementalLoadingList<BookSummaryInfo>
