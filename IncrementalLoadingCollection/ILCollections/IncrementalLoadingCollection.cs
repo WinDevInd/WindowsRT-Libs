@@ -5,7 +5,7 @@
 //-------------------------------------------------------------------------------------------------
 namespace JISoft.Collections.ILCollections
 {
-    using System;
+    using System;    
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Runtime.InteropServices.WindowsRuntime;
@@ -36,7 +36,7 @@ namespace JISoft.Collections.ILCollections
         public bool HasMoreItems
         {
             get { return this.CanLoadMoreItems(); }
-        }
+        }       
 
         /// <summary>
         /// Wrapper method - Load more item asynchronously
@@ -56,7 +56,7 @@ namespace JISoft.Collections.ILCollections
             }
         }
 
-        #endregion
+        #endregion       
 
         #region Overridables method
 
@@ -71,7 +71,7 @@ namespace JISoft.Collections.ILCollections
         /// Overridable Method - Gets a value indicating whether Collection can load more item
         /// </summary>
         /// <returns>Returns the value indicating whether collection can load more item</returns>
-        protected abstract bool CanLoadMoreItems();
+        protected abstract bool CanLoadMoreItems();        
 
         #endregion
 
@@ -86,8 +86,7 @@ namespace JISoft.Collections.ILCollections
         {
             try
             {
-                var items = await this.LoadNextItemsAsync(count);
-                isBusy = false;
+                var items = await this.LoadNextItemsAsync(count);                              
                 return new LoadMoreItemsResult { Count = (uint)items };
             }
             catch (Exception e)
