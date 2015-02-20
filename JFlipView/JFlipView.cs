@@ -32,7 +32,7 @@ namespace JISoft.FlipView
         {            
             this.IncrementalLoadingTrigger = IncrementalLoadingTrigger.Edge;
             this.DataFetchSize = 3;
-            this.IncrementalLoadingThresold = 1;
+            this.IncrementalLoadingThreshold = 1;
             IsBusy = false;
         }
 
@@ -110,7 +110,7 @@ namespace JISoft.FlipView
         //
         // Returns:
         //     The loading threshold, in terms of pages. The default is 1
-        public double IncrementalLoadingThresold
+        public double IncrementalLoadingThreshold
         {
             get;
             set;
@@ -143,7 +143,7 @@ namespace JISoft.FlipView
                                 return;
                             }
 
-                            for (int i = 0; i <= this.IncrementalLoadingThresold; i++)
+                            for (int i = 0; i <= this.IncrementalLoadingThreshold; i++)
                             {
                                 await incrementalLoadingInterface.LoadMoreItemsAsync((uint)this.DataFetchSize);
                             }
@@ -161,7 +161,7 @@ namespace JISoft.FlipView
         //      Identifies when to trigger IncrementalLoading
         private bool CanIncrementalLoadigTrigger()
         {
-            if (!IsBusy && IncrementalLoadingTrigger == IncrementalLoadingTrigger.Edge && (this.Items.Count - this.SelectedIndex) <= (DataFetchSize * IncrementalLoadingThresold))
+            if (!IsBusy && IncrementalLoadingTrigger == IncrementalLoadingTrigger.Edge && (this.Items.Count - this.SelectedIndex) <= (DataFetchSize * IncrementalLoadingThreshold))
             {
                 return true;
             }
