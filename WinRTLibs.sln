@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncrementalLoadingCollections", "IncrementalLoadingCollection\IncrementalLoadingCollections.csproj", "{76001606-53A0-4AC9-9EF5-8EF0E023B89F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFlipView", "JFlipView\JFlipView.csproj", "{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,16 @@ Global
 		{76001606-53A0-4AC9-9EF5-8EF0E023B89F}.Release|ARM.ActiveCfg = Release|Any CPU
 		{76001606-53A0-4AC9-9EF5-8EF0E023B89F}.Release|x64.ActiveCfg = Release|Any CPU
 		{76001606-53A0-4AC9-9EF5-8EF0E023B89F}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Release|x64.ActiveCfg = Release|Any CPU
+		{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
