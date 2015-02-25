@@ -121,11 +121,6 @@
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="IncrementalLoadingCollections">
-      <HintPath>..\packages\JISoft.Collections.1.0.0.5\lib\portable-win81+wpa81\IncrementalLoadingCollections.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +128,11 @@
       <Project>{ba07be85-2ce2-4888-8bed-a0098bd34be6}</Project>
       <Name>JFlipView</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="IncrementalLoadingCollections">
+      <HintPath>..\packages\JISoft.Collections.1.1.0.1\lib\portable-wpa81+win81\IncrementalLoadingCollections.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
