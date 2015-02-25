@@ -20,6 +20,7 @@ namespace JISoft.FlipView
     public class JFlipView : Windows.UI.Xaml.Controls.FlipView, IDisposable
     {
         private bool _disposed;
+        public event EventHandler onItemPropertyChanged;
 
         // Summary:
         //      Represents a control that enables a user to select an item from a collection
@@ -29,7 +30,7 @@ namespace JISoft.FlipView
         //      default value is Edge - to support IncrementalLoading of data
         //
         public JFlipView()
-        {            
+        {
             this.IncrementalLoadingTrigger = IncrementalLoadingTrigger.Edge;
             this.DataFetchSize = 3;
             this.IncrementalLoadingThreshold = 1;
@@ -50,6 +51,11 @@ namespace JISoft.FlipView
             if (this.Items.Count == 0)
             {
                 this.LoadNextItemAsync(false);
+            }
+
+            if (this.onItemPropertyChanged != null)
+            {
+                this.onItemPropertyChanged(this, EventArgs.Empty);
             }
         }
 
@@ -76,10 +82,10 @@ namespace JISoft.FlipView
             }
             set
             {
-                if(value!=_IncrementalLoadingTrigger)
+                if (value != _IncrementalLoadingTrigger)
                 {
                     _IncrementalLoadingTrigger = value;
-                    switch(value)
+                    switch (value)
                     {
                         case IncrementalLoadingTrigger.Edge:
                             this.SelectionChanged += JFlipView_SelectionChanged;
@@ -98,7 +104,7 @@ namespace JISoft.FlipView
         //
         // Returns:
         //     The amount of data to fetch per interval, in pages. The default is 3.
-        public double DataFetchSize
+        public int DataFetchSize
         {
             get;
             set;
@@ -110,7 +116,7 @@ namespace JISoft.FlipView
         //
         // Returns:
         //     The loading threshold, in terms of pages. The default is 1
-        public double IncrementalLoadingThreshold
+        public int IncrementalLoadingThreshold
         {
             get;
             set;
