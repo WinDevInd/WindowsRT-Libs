@@ -22,13 +22,12 @@ namespace JISoft.FlipView
         private bool _disposed;
         public event EventHandler onItemPropertyChanged;
 
-        // Summary:
-        //      Represents a control that enables a user to select an item from a collection
-        //      of items.
-        //  Note :
-        //      Use Dispose method during unloading of Element when Setting IncrementalLoadingTrigger value "Edge" 
-        //      default value is Edge - to support IncrementalLoading of data
-        //
+        /// <summary>
+        /// Represents a control that enables a user to select an item from a collection of items.
+        ///  Note :
+        ///      Use Dispose method during unloading of Element when Setting IncrementalLoadingTrigger value "Edge" 
+        ///      default value is Edge - to support IncrementalLoading of data
+        /// </summary>
         public JFlipView()
         {
             this.IncrementalLoadingTrigger = IncrementalLoadingTrigger.Edge;
@@ -43,6 +42,8 @@ namespace JISoft.FlipView
             {
                 Dispose(false);
             }
+
+            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> JFlipView Destoyed By GC <<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
 
         protected override void OnItemsChanged(object e)
@@ -64,16 +65,17 @@ namespace JISoft.FlipView
             get;
             set;
         }
-        //
-        // Summary:
-        //     Gets or sets a value that indicates the conditions for prefetch operations
-        //     by the ListViewBase class. Use Dispose method during unloading of Element
-        //     when Setting IncrementalLoadingTrigger value "Edge"
-        //
-        // Returns:
-        //     An enumeration value that indicates the conditions that trigger prefetch
-        //     operations. The default is Edge.
+
         private IncrementalLoadingTrigger _IncrementalLoadingTrigger;
+        /// <summary>
+        /// Gets or sets a value that indicates the conditions for prefetch operations
+        ///     by the ListViewBase class. Use Dispose method during unloading of Element
+        ///     when Setting IncrementalLoadingTrigger value "Edge"
+        ///
+        /// Returns:
+        ///     An enumeration value that indicates the conditions that trigger prefetch
+        ///     operations. The default is Edge.
+        /// </summary>
         public IncrementalLoadingTrigger IncrementalLoadingTrigger
         {
             get
@@ -98,32 +100,29 @@ namespace JISoft.FlipView
             }
         }
 
-        //
-        // Summary:
-        //     Gets or sets the amount of data to fetch for virtualizing/prefetch operations.
-        //
-        // Returns:
-        //     The amount of data to fetch per interval, in pages. The default is 3.
+        /// <summary>
+        ///  Gets or sets the amount of data to fetch for virtualizing/prefetch operations.
+        ///
+        ///  The default value is  3.
+        /// </summary>
         public int DataFetchSize
         {
             get;
             set;
         }
 
-        // Summary:
-        //     Gets or sets the threshold range that governs when the ListViewBase class
-        //     will begin to prefetch more items.
-        //
-        // Returns:
-        //     The loading threshold, in terms of pages. The default is 1
+        /// <summary>
+        ///  Gets or sets the threshold range that governs when the ListViewBase class
+        ///     will begin to prefetch more items.
+        ///
+        /// The default value is 1
+        /// </summary>
         public int IncrementalLoadingThreshold
         {
             get;
             set;
         }
 
-        // Summary:
-        //     Occurs when the currently selected item changes.
         private async void JFlipView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
         {
             await LoadNextItemAsync();
@@ -174,12 +173,12 @@ namespace JISoft.FlipView
             return false;
         }
 
-        // Summary:
-        //     Dispose managed resource and Event unsubscription 
-        //
-        // Parameters:
-        //      canThrowException:        
-        //                     True if You need to handle disposing exception othewise False
+        /// <summary>
+        ///  Dispose managed resource and Event unsubscription 
+        ///        
+        ///CanThrowException:        
+        ///                     True if You need to handle disposing exception othewise False
+        /// </summary>
         public void Dispose()
         {
             try

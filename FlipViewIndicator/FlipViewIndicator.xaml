@@ -5,16 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="200"   
-    d:DesignWidth="480" x:Name="IndicatorControl">
+    mc:Ignorable="d"    
+    x:Name="IndicatorControl"
+    d:DesignHeight="200" d:DesignWidth="480"    
+    Loaded="IndicatorControl_Loaded"
+    Unloaded="IndicatorControl_Unloaded">
     <UserControl.Resources>
 
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ContentPresenter ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}"/>
+                        <ContentPresenter ContentTransitions="{TemplateBinding ContentTransitions}" 
+                                          Content="{TemplateBinding Content}"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -34,7 +37,6 @@
         ItemTemplateSelector="{Binding IndicatorSelector, ElementName=IndicatorControl}"
         ItemsSource="{Binding IndicatorItemSource,ElementName=IndicatorControl}"        
         SelectionMode="Single"        
-        SelectedIndex="{Binding SelectedIndex,ElementName=IndicatorControl}"        
         SelectionChanged="ListViewIndicator_SelectionChanged"
         ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" 
         ItemContainerStyle="{StaticResource ListViewItemStyle}">
