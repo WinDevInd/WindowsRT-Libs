@@ -125,7 +125,7 @@ namespace JISoft.FlipView
 
         private async void JFlipView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
         {
-            await LoadNextItemAsync();
+            await LoadNextItemAsync();            
         }
 
         // Summary:
@@ -187,20 +187,37 @@ namespace JISoft.FlipView
             }
             catch (Exception e)
             {
-                string Message = "Error occured during dispose " + e.Message;
-                throw new Exception(Message, e);
-
+                throw e;
             }
         }
 
         private void Dispose(bool disposeManagedResource)
         {
-            if (disposeManagedResource)
+            if(_disposed)
+            {
+                return;
+            }
+            try
             {
                 this.SelectionChanged -= JFlipView_SelectionChanged;
             }
-            //Release other resources if availble
-            _disposed = true;
+            catch (Exception e)
+            {
+                string Message = "Error occured during dispose " + e.Message;
+                if (disposeManagedResource)
+                {
+                    throw new Exception(Message, e);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Error disposing JFlipView - Please report this error to Developer");
+                }
+            }
+            finally
+            {
+                _disposed = true;
+            }
+            //Release other resources if availble           
         }
     }
 }
