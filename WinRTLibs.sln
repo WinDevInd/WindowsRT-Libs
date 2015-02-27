@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncrementalLoadingCollections", "IncrementalLoadingCollection\IncrementalLoadingCollections.csproj", "{76001606-53A0-4AC9-9EF5-8EF0E023B89F}"
 EndProject
@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFlipView", "JFlipView\JFli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlipViewIndicator", "FlipViewIndicator\FlipViewIndicator.csproj", "{B27F98BF-7AC5-48F9-A0D8-2F0C791DBBEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App3.Windows", "App3.Windows\TestingProject.csproj", "{FEE29D87-4776-4CCB-A7F9-D24D98753526}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingProject", "App3.Windows\TestingProject.csproj", "{FEE29D87-4776-4CCB-A7F9-D24D98753526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppWP", "TestAppWP\TestAppWP.csproj", "{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -86,6 +88,26 @@ Global
 		{FEE29D87-4776-4CCB-A7F9-D24D98753526}.Release|x86.ActiveCfg = Release|x86
 		{FEE29D87-4776-4CCB-A7F9-D24D98753526}.Release|x86.Build.0 = Release|x86
 		{FEE29D87-4776-4CCB-A7F9-D24D98753526}.Release|x86.Deploy.0 = Release|x86
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|ARM.Build.0 = Debug|ARM
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|ARM.Deploy.0 = Debug|ARM
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|x86.ActiveCfg = Debug|x86
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|x86.Build.0 = Debug|x86
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Debug|x86.Deploy.0 = Debug|x86
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|ARM.ActiveCfg = Release|ARM
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|ARM.Build.0 = Release|ARM
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|ARM.Deploy.0 = Release|ARM
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|x64.ActiveCfg = Release|Any CPU
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|x86.ActiveCfg = Release|x86
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|x86.Build.0 = Release|x86
+		{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -33,7 +33,7 @@ namespace JISoft.Pagination
 
 
         public FlipViewIndicator()
-        {
+        {            
             this.InitializeComponent();
             this.Initialize();
         }
@@ -53,6 +53,7 @@ namespace JISoft.Pagination
             this.IndicatorSelector = new IndicatorSelector();
             this.IndicatorItemSource = new ObservableList<TemplateChooser>();            
             this.timer = new DispatcherTimer();
+            timer.Tick+=timer_Tick;
             this.SlideShowTimeSpan = TimeSpan.FromSeconds(30.00);
             shouldResumeSlideShow = false;
         }
