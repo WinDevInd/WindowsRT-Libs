@@ -17,9 +17,8 @@ namespace JISoft.FlipView
 
     [Version(1)]
     [WebHostHidden]
-    public class JFlipView : Windows.UI.Xaml.Controls.FlipView, IDisposable
-    {
-        private bool _disposed;
+    public class JFlipView : Windows.UI.Xaml.Controls.FlipView
+    {     
         public event EventHandler onItemPropertyChanged;
 
         /// <summary>
@@ -38,11 +37,6 @@ namespace JISoft.FlipView
 
         ~JFlipView()
         {
-            if (!_disposed)
-            {
-                Dispose(false);
-            }
-
             System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> JFlipView Destoyed By GC <<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
 
@@ -125,7 +119,7 @@ namespace JISoft.FlipView
 
         private async void JFlipView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
         {
-            await LoadNextItemAsync();            
+            await LoadNextItemAsync();
         }
 
         // Summary:
@@ -171,53 +165,6 @@ namespace JISoft.FlipView
                 return true;
             }
             return false;
-        }
-
-        /// <summary>
-        ///  Dispose managed resource and Event unsubscription 
-        ///        
-        ///CanThrowException:        
-        ///                     True if You need to handle disposing exception othewise False
-        /// </summary>
-        public void Dispose()
-        {
-            try
-            {
-                Dispose(true);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        private void Dispose(bool disposeManagedResource)
-        {
-            if(_disposed)
-            {
-                return;
-            }
-            try
-            {
-                this.SelectionChanged -= JFlipView_SelectionChanged;
-            }
-            catch (Exception e)
-            {
-                string Message = "Error occured during dispose " + e.Message;
-                if (disposeManagedResource)
-                {
-                    throw new Exception(Message, e);
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Error disposing JFlipView - Please report this error to Developer");
-                }
-            }
-            finally
-            {
-                _disposed = true;
-            }
-            //Release other resources if availble           
         }
     }
 }

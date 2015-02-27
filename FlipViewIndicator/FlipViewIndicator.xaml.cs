@@ -27,8 +27,7 @@ namespace JISoft.Pagination
     public sealed partial class FlipViewIndicator : UserControl, IDisposable
     {
         private JFlipView IndicatorProvider;
-        private int previousSelectedIndex;
-        private TimeSpan SlidShowDefaultTimeSpan;
+        private int previousSelectedIndex;        
         private DispatcherTimer timer;
         private bool shouldResumeSlideShow;
 
@@ -52,9 +51,9 @@ namespace JISoft.Pagination
             this.IndicatorStyle = ListViewIndicator.Style;
             this.previousSelectedIndex = 0;
             this.IndicatorSelector = new IndicatorSelector();
-            this.IndicatorItemSource = new ObservableList<TemplateChooser>();
-            this.SlidShowDefaultTimeSpan = TimeSpan.FromSeconds(30.00);
+            this.IndicatorItemSource = new ObservableList<TemplateChooser>();            
             this.timer = new DispatcherTimer();
+            this.SlideShowTimeSpan = TimeSpan.FromSeconds(30.00);
             shouldResumeSlideShow = false;
         }
 
@@ -307,10 +306,7 @@ namespace JISoft.Pagination
         private void IndicatorControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (this.IndicatorProvider != null)
-            {
-                IndicatorProvider.onItemPropertyChanged += IndicatorProviderControl_onItemPropertyChanged;
-                IndicatorProvider.SelectionChanged += flipView_SelectionChanged;
-                SetIndicatorListItemSource(IndicatorProvider);
+            {                
                 if (shouldResumeSlideShow)
                 {
                     this.Play();
@@ -320,7 +316,8 @@ namespace JISoft.Pagination
 
         private void IndicatorControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            Dispose();
+            this.Pause();
+            shouldResumeSlideShow = true;
         }
         #endregion
 
@@ -336,13 +333,8 @@ namespace JISoft.Pagination
             if (IsSlideShowRunning || this.ListViewIndicator.Items.Count <= 1)
             {
                 return;
-            }
-            if (this.SlideShowTimeSpan == TimeSpan.FromSeconds(0))
-            {
-                this.SlideShowTimeSpan = this.SlidShowDefaultTimeSpan;
-            }
-            timer.Interval = this.SlideShowTimeSpan;
-            timer.Tick += timer_Tick;
+            }            
+            timer.Interval = this.SlideShowTimeSpan;            
             IsSlideShowRunning = true;
             timer.Start();
         }
@@ -352,8 +344,7 @@ namespace JISoft.Pagination
         ///  This method will remove the timer for slideshow
         /// </summary>
         public void Pause()
-        {
-            timer.Tick -= timer_Tick;
+        {            
             timer.Stop();
             IsSlideShowRunning = false;
         }
@@ -364,8 +355,7 @@ namespace JISoft.Pagination
         /// </summary>
         public void Stop()
         {
-
-            timer.Tick -= timer_Tick;
+            
             timer.Stop();
             IsSlideShowRunning = false;
             this.ListViewIndicator.SelectedIndex = 0;

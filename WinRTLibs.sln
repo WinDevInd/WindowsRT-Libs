@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFlipView", "JFlipView\JFli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlipViewIndicator", "FlipViewIndicator\FlipViewIndicator.csproj", "{B27F98BF-7AC5-48F9-A0D8-2F0C791DBBEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App3.Windows", "App3\App3.Windows\App3.Windows.csproj", "{FEE29D87-4776-4CCB-A7F9-D24D98753526}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App3.Windows", "App3.Windows\TestingProject.csproj", "{FEE29D87-4776-4CCB-A7F9-D24D98753526}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		App3\App3.Shared\App3.Shared.projitems*{fee29d87-4776-4ccb-a7f9-d24d98753526}*SharedItemsImports = 4
+		App3.Shared\App3.Shared.projitems*{fee29d87-4776-4ccb-a7f9-d24d98753526}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

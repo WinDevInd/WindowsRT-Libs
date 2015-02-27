@@ -142,15 +142,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\Training Material\WinRT Projects\WindowsRT-Libs\FlipViewIndicator\FlipViewIndicator.csproj">
+    <ProjectReference Include="..\FlipViewIndicator\FlipViewIndicator.csproj">
       <Project>{b27f98bf-7ac5-48f9-a0d8-2f0c791dbbea}</Project>
       <Name>FlipViewIndicator</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Training Material\WinRT Projects\WindowsRT-Libs\IncrementalLoadingCollection\IncrementalLoadingCollections.csproj">
+    <ProjectReference Include="..\IncrementalLoadingCollection\IncrementalLoadingCollections.csproj">
       <Project>{76001606-53a0-4ac9-9ef5-8ef0e023b89f}</Project>
       <Name>IncrementalLoadingCollections</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\Training Material\WinRT Projects\WindowsRT-Libs\JFlipView\JFlipView.csproj">
+    <ProjectReference Include="..\JFlipView\JFlipView.csproj">
       <Project>{ba07be85-2ce2-4888-8bed-a0098bd34be6}</Project>
       <Name>JFlipView</Name>
     </ProjectReference>
