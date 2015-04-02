@@ -142,7 +142,7 @@ namespace JISoft.FlipView
                                 return;
                             }
 
-                            for (int i = 0; i <= this.IncrementalLoadingThreshold; i++)
+                            for (int i = 1; i <= this.IncrementalLoadingThreshold; i++)
                             {
                                 await incrementalLoadingInterface.LoadMoreItemsAsync((uint)this.DataFetchSize);
                             }
