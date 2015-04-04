@@ -93,6 +93,7 @@
         Margin="{Binding IndicatorMargin,ElementName=IndicatorControl}"
         ItemsSource="{Binding IndicatorSource,ElementName=IndicatorControl}" 
         SelectionMode="Single"
+        SelectionChanged="ListViewIndicator_SelectionChanged"
         ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
         ScrollViewer.HorizontalScrollMode="Enabled" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
         <ListView.ItemsPanel>

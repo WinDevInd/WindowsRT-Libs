@@ -384,5 +384,14 @@ namespace JISoft.Pagination
             timer.Tick -= timer_Tick;
             timer.Stop();
         }
+
+        private void ListViewIndicator_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.ListViewIndicator.Items != null && this.ListViewIndicator.Items.Count > 0)
+            {
+                int selectedIndex = this.ListViewIndicator.SelectedIndex;
+                this.ListViewIndicator.ScrollIntoView(this.ListViewIndicator.Items[selectedIndex]);
+            }
+        }
     }
 }
