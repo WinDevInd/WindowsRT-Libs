@@ -128,6 +128,10 @@
     <Reference Include="JFlipView">
       <HintPath>..\packages\JISoft.FlipView.1.2.0.0\lib\wpa81\JFlipView.dll</HintPath>
     </Reference>
+    <Reference Include="JRatingControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

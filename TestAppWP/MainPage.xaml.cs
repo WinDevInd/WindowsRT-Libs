@@ -18,6 +18,15 @@ using Windows.UI.Xaml.Navigation;
 
 namespace TestAppWP
 {
+
+    public class FKPivotItem : PivotItem
+    {
+        public FKPivotItem()
+        {
+            base.DefaultStyleKey = typeof(FKPivotItem);
+        }
+    }
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -36,12 +45,12 @@ namespace TestAppWP
             get;
             set;
         }
-        
+
         public MainPage()
         {
             this.DataContext = this;
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;            
+            this.NavigationCacheMode = NavigationCacheMode.Required;
             //this.flipvw1.ItemsSource = Images;
 
         }
@@ -53,17 +62,24 @@ namespace TestAppWP
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Images = new ObservableCollection<ImageModel>();
-            for (int i = 2; i <= 9; i++)
-            {
-                Images.Add(new ImageModel() { ImagePath = "Assets/WinLogos/" + i + ".jpg" });
-            }
-            this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);         
+            //Images = new ObservableCollection<ImageModel>();
+            //for (int i = 2; i <= 9; i++)
+            //{
+            //    Images.Add(new ImageModel() { ImagePath = "Assets/WinLogos/" + i + ".jpg" });
+            //}
+            //this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
+
+            //this.MyPivot.Items.Add(new FKPivotItem());
+            //this.MyPivot.Items.Add(new FKPivotItem());
+            //this.MyPivot.Items.Add(new FKPivotItem());
+            //this.MyPivot.Items.Add(new FKPivotItem());
         }
 
         private void Play_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            this.FlipViewInd.Play();
+            //this.FlipViewInd.Play();
         }
+
+
     }
 }

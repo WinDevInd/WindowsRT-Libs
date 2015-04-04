@@ -10,23 +10,80 @@
     d:DesignHeight="200" d:DesignWidth="480"    
     Loaded="IndicatorControl_Loaded"
     Unloaded="IndicatorControl_Unloaded">
-    <UserControl.Resources>
 
-        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+    <UserControl.Resources>
+        <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ContentPresenter ContentTransitions="{TemplateBinding ContentTransitions}" 
-                                          Content="{TemplateBinding Content}"/>
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="UnselectedSwiping"/>
+                                    <VisualState x:Name="UnselectedPointerOver"/>
+                                    <VisualState x:Name="Selecting"/>
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SelectedItemPresenter">
+                                    			<DiscreteObjectKeyFrame KeyTime="0">
+                                    				<DiscreteObjectKeyFrame.Value>
+                                    					<Visibility>Visible</Visibility>
+                                    				</DiscreteObjectKeyFrame.Value>
+                                    			</DiscreteObjectKeyFrame>
+                                    		</ObjectAnimationUsingKeyFrames>
+                                    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="UnSelectedItemPresenter">
+                                    			<DiscreteObjectKeyFrame KeyTime="0">
+                                    				<DiscreteObjectKeyFrame.Value>
+                                    					<Visibility>Collapsed</Visibility>
+                                    				</DiscreteObjectKeyFrame.Value>
+                                    			</DiscreteObjectKeyFrame>
+                                    		</ObjectAnimationUsingKeyFrames>
+                                    		<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SelectedItemPresenter" d:IsOptimized="True"/>
+                                    		<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UnSelectedItemPresenter" d:IsOptimized="True"/>
+                                    	</Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedSwiping"/>
+                                    <VisualState x:Name="Unselecting"/>
+                                    <VisualState x:Name="Unselected">
+                                        <Storyboard>
+                                    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SelectedItemPresenter">
+                                    			<DiscreteObjectKeyFrame KeyTime="0">
+                                    				<DiscreteObjectKeyFrame.Value>
+                                    					<Visibility>Collapsed</Visibility>
+                                    				</DiscreteObjectKeyFrame.Value>
+                                    			</DiscreteObjectKeyFrame>
+                                    		</ObjectAnimationUsingKeyFrames>
+                                    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="UnSelectedItemPresenter">
+                                    			<DiscreteObjectKeyFrame KeyTime="0">
+                                    				<DiscreteObjectKeyFrame.Value>
+                                    					<Visibility>Visible</Visibility>
+                                    				</DiscreteObjectKeyFrame.Value>
+                                    			</DiscreteObjectKeyFrame>
+                                    		</ObjectAnimationUsingKeyFrames>
+                                    		<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SelectedItemPresenter" d:IsOptimized="True"/>
+                                    		<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UnSelectedItemPresenter" d:IsOptimized="True"/>
+                                    	</Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+                            <ContentPresenter x:Name="SelectedItemPresenter" ContentTemplate="{Binding SelectedItemTemplate, ElementName=IndicatorControl}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              Content="{TemplateBinding Content}"/>
+                            <ContentPresenter x:Name="UnSelectedItemPresenter" ContentTemplate="{Binding UnSelectedItemTemplate, ElementName=IndicatorControl}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                              Content="{TemplateBinding Content}"/>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <ListView
         x:Name="ListViewIndicator"
-        x:FieldModifier="private"
+        x:FieldModifier="protected"
         Background="{Binding IndicatorBackground,ElementName=IndicatorControl}"
         IncrementalLoadingTrigger="None"
         HorizontalAlignment="Stretch"
@@ -34,12 +91,10 @@
         HorizontalContentAlignment="{Binding HorizontalContentAlignment,ElementName=IndicatorControl}"
         VerticalContentAlignment="{Binding VerticalContentAlignment,ElementName=IndicatorControl}"
         Margin="{Binding IndicatorMargin,ElementName=IndicatorControl}"
-        ItemTemplateSelector="{Binding IndicatorSelector, ElementName=IndicatorControl}"
-        ItemsSource="{Binding IndicatorItemSource,ElementName=IndicatorControl}"        
-        SelectionMode="Single"        
-        SelectionChanged="ListViewIndicator_SelectionChanged"
-        ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" 
-        ItemContainerStyle="{StaticResource ListViewItemStyle}">
+        ItemsSource="{Binding IndicatorSource,ElementName=IndicatorControl}" 
+        SelectionMode="Single"
+        ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+        ScrollViewer.HorizontalScrollMode="Enabled" ItemContainerStyle="{StaticResource ListViewItemStyle1}">
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
                 <ItemsStackPanel Orientation="Horizontal" Background="{Binding ItemsPanelBackground,ElementName=IndicatorControl}" 
