@@ -82,6 +82,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BlankPage1.xaml.cs">
+      <DependentUpon>BlankPage1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -113,21 +116,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BlankPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FlipViewIndicator">
-      <HintPath>..\packages\JISoft.FlipViewIndicator.1.0.0.1\lib\wpa81\FlipViewIndicator.dll</HintPath>
-    </Reference>
     <Reference Include="IncrementalLoadingCollections">
       <HintPath>..\packages\JISoft.Collections.1.1.0.1\lib\wpa81\IncrementalLoadingCollections.dll</HintPath>
-    </Reference>
-    <Reference Include="JFlipView, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\JISoft.FlipView.1.2.2\lib\portable-wpa81+win81\JFlipView.dll</HintPath>
     </Reference>
     <Reference Include="JRatingControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -136,6 +136,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlipViewIndicator\FlipViewIndicator.csproj">
+      <Project>{b27f98bf-7ac5-48f9-a0d8-2f0c791dbbea}</Project>
+      <Name>FlipViewIndicator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JFlipView\JFlipView.csproj">
+      <Project>{ba07be85-2ce2-4888-8bed-a0098bd34be6}</Project>
+      <Name>JFlipView</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
