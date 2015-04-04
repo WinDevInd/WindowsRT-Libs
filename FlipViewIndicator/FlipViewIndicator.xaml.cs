@@ -13,6 +13,7 @@ namespace JISoft.Pagination
     using System.IO;
     using System.Linq;
     using System.Runtime.InteropServices.WindowsRuntime;
+    using Windows.ApplicationModel;
     using Windows.Foundation;
     using Windows.Foundation.Collections;
     using Windows.UI;
@@ -26,15 +27,19 @@ namespace JISoft.Pagination
 
     public sealed partial class FlipViewIndicator : UserControl, IDisposable
     {
-        private JFlipView IndicatorProvider;
-        private int previousSelectedIndex;        
+        public JFlipView IndicatorProvider
+        {
+            get;
+            private set;
+        }
         private DispatcherTimer timer;
         private bool shouldResumeSlideShow;
 
 
         public FlipViewIndicator()
-        {            
+        {
             this.InitializeComponent();
+            this.ListViewIndicator.DataContext = this;
             this.Initialize();
         }
 
@@ -43,17 +48,23 @@ namespace JISoft.Pagination
             System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>> FlipView Indicator disposed <<<<<<<<<<<<<<<<<");
         }
 
+        protected override void OnApplyTemplate()
+        {
+            if (DesignMode.DesignModeEnabled)
+            {
+                return;
+            }
+            base.OnApplyTemplate();
+        }
+
         /// <summary>
         /// Initialize default values and new refrences for properties
         /// </summary>
         private void Initialize()
         {
-            this.IndicatorStyle = ListViewIndicator.Style;
-            this.previousSelectedIndex = 0;
-            this.IndicatorSelector = new IndicatorSelector();
-            this.IndicatorItemSource = new ObservableList<TemplateChooser>();            
+            // this.IndicatorSelector = new IndicatorSelector();
             this.timer = new DispatcherTimer();
-            timer.Tick+=timer_Tick;
+            timer.Tick += timer_Tick;
             this.SlideShowTimeSpan = TimeSpan.FromSeconds(30.00);
             shouldResumeSlideShow = false;
         }
@@ -118,23 +129,26 @@ namespace JISoft.Pagination
 
         #region Private Properties
 
-        /// <summary> 
-        ///     Gets the ItemTemplateSelector use for Indicator
-        ///<summary> 
-        public IndicatorSelector IndicatorSelector
+        ///// <summary> 
+        /////     Gets the ItemTemplateSelector use for Indicator
+        /////<summary> 
+        //public IndicatorSelector IndicatorSelector
+        //{
+        //    get;
+        //    private set;
+        //}
+
+
+        public ObservableCollection<object> IndicatorSource
         {
-            get;
-            private set;
+            get { return (ObservableCollection<object>)GetValue(IndicatorSourceProperty); }
+            set { SetValue(IndicatorSourceProperty, value); }
         }
 
-        /// <summary> 
-        ///     Gets the ItemSource as Collection which is used for Indicator
-        public ObservableList<TemplateChooser> IndicatorItemSource
-        {
-            get;
-            private set;
-        }
-
+        // Using a DependencyProperty as the backing store for IndicatorSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IndicatorSourceProperty =
+            DependencyProperty.Register("IndicatorSource", typeof(ObservableCollection<object>), typeof(FlipViewIndicator), new PropertyMetadata(0));
+        
         #endregion
 
         #region Public Property
@@ -144,14 +158,8 @@ namespace JISoft.Pagination
         /// </summary>
         public DataTemplate SelectedItemTemplate
         {
-            get
-            {
-                return this.IndicatorSelector.SelectedItemTemplate;
-            }
-            set
-            {
-                this.IndicatorSelector.SelectedItemTemplate = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -159,14 +167,8 @@ namespace JISoft.Pagination
         /// </summary>
         public DataTemplate UnSelectedItemTemplate
         {
-            get
-            {
-                return this.IndicatorSelector.UnSelectedItemTemplate;
-            }
-            set
-            {
-                this.IndicatorSelector.UnSelectedItemTemplate = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -243,14 +245,17 @@ namespace JISoft.Pagination
 
         private void SubscribeToFlipViewEvents(ref JFlipView flipView)
         {
-            if (this.IndicatorProvider == null)
+            if (this.IndicatorProvider == null || IndicatorProvider != flipView)
             {
-                flipView.onItemPropertyChanged += IndicatorProviderControl_onItemPropertyChanged;
                 flipView.SelectionChanged += flipView_SelectionChanged;
                 IndicatorProvider = flipView;
+                Binding selectedIndexBinding = new Binding();
+                selectedIndexBinding.Path = new PropertyPath("SelectedIndex");
+                selectedIndexBinding.ElementName = "IndicatorProvider";
+                selectedIndexBinding.Mode = BindingMode.TwoWay;
+                selectedIndexBinding.Source = IndicatorProvider;
+                ListViewIndicator.SetBinding(ListView.SelectedIndexProperty, selectedIndexBinding);
             }
-
-            SetIndicatorListItemSource(flipView);
         }
 
         private void flipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -261,53 +266,14 @@ namespace JISoft.Pagination
             this.ListViewIndicator.ScrollIntoView(ListViewIndicator.Items[selectedIndex]);
         }
 
-        private void IndicatorProviderControl_onItemPropertyChanged(object sender, EventArgs e)
-        {
-            JFlipView flipView = sender as JFlipView;
-            SetIndicatorListItemSource(flipView);
-        }
-
-        #endregion
-
-        # region Events for ListView
-
-        private void ListViewIndicator_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ListViewIndicator.SelectedIndex == -1)
-            {
-                return;
-            }
-            if (this.IndicatorProvider.SelectedIndex != ListViewIndicator.SelectedIndex)
-            {
-                IndicatorProvider.SelectedIndex = ListViewIndicator.SelectedIndex;
-            }
-            IndicatorItemSource.Replace(previousSelectedIndex, new TemplateChooser() { IsSelected = false });
-            IndicatorItemSource.Replace(IndicatorProvider.SelectedIndex, new TemplateChooser() { IsSelected = true });
-            previousSelectedIndex = IndicatorProvider.SelectedIndex;
-        }
-
         #endregion
 
         #region private Methods and Incontrol events
 
-        private void SetIndicatorListItemSource(JFlipView flipView)
-        {
-            for (int i = IndicatorItemSource.Count; i <= flipView.Items.Count - 1; i++)
-            {
-                IndicatorItemSource.Insert(IndicatorItemSource.Count, new TemplateChooser() { IsSelected = false });
-            }
-
-            //// Make first items as selected - manually
-            if (flipView.Items.Count > 0 && (flipView.SelectedIndex == -1 || flipView.SelectedIndex == 0))
-            {
-                IndicatorItemSource.Replace(0, new TemplateChooser() { IsSelected = true });
-            }
-        }
-
         private void IndicatorControl_Loaded(object sender, RoutedEventArgs e)
         {
             if (this.IndicatorProvider != null)
-            {                
+            {
                 if (shouldResumeSlideShow)
                 {
                     this.Play();
@@ -334,8 +300,8 @@ namespace JISoft.Pagination
             if (IsSlideShowRunning || this.ListViewIndicator.Items.Count <= 1)
             {
                 return;
-            }            
-            timer.Interval = this.SlideShowTimeSpan;            
+            }
+            timer.Interval = this.SlideShowTimeSpan;
             IsSlideShowRunning = true;
             timer.Start();
         }
@@ -345,7 +311,7 @@ namespace JISoft.Pagination
         ///  This method will remove the timer for slideshow
         /// </summary>
         public void Pause()
-        {            
+        {
             timer.Stop();
             IsSlideShowRunning = false;
         }
@@ -356,7 +322,7 @@ namespace JISoft.Pagination
         /// </summary>
         public void Stop()
         {
-            
+
             timer.Stop();
             IsSlideShowRunning = false;
             this.ListViewIndicator.SelectedIndex = 0;
@@ -390,16 +356,10 @@ namespace JISoft.Pagination
             if (this.IndicatorProvider != null)
             {
                 this.IndicatorProvider.SelectionChanged -= flipView_SelectionChanged;
-                this.IndicatorProvider.onItemPropertyChanged -= IndicatorProviderControl_onItemPropertyChanged;
                 this.IndicatorProvider = null;
-                this.IndicatorItemSource.Clear();
                 timer.Tick -= timer_Tick;
                 timer.Stop();
                 IsSlideShowRunning = false;
-                if (removeAll)
-                {
-                    this.IndicatorItemSource = null;
-                }
             }
         }
     }

@@ -37,7 +37,8 @@ namespace JISoft.Pagination
             {
                 if (item != null)
                 {
-                    bool isSelected = (item as TemplateChooser).IsSelected;
+                    TemplateChooser template = item as TemplateChooser;
+                    bool isSelected = template.IsSelected;
                     if (isSelected)
                     {
                         return SelectedItemTemplate;
@@ -48,7 +49,7 @@ namespace JISoft.Pagination
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
                 // nothing
             }            

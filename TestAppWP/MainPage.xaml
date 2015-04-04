@@ -8,10 +8,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:tools="using:JISoft.FlipView"        
     xmlns:toolkit="using:JISoft.Pagination"
+    xmlns:RatingControl="using:JISoft.RatingControl"
     mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot">        
-        <tools:JFlipView x:Name="flipvw" VerticalAlignment="Top" HorizontalAlignment="Stretch" IncrementalLoadingTrigger="Edge"                         
+        <!--<tools:JFlipView x:Name="flipvw" VerticalAlignment="Top" HorizontalAlignment="Stretch" IncrementalLoadingTrigger="Edge"                         
                            DataFetchSize="2" ItemsSource="{Binding Images}"
                          IncrementalLoadingThreshold="1"  Margin="0,0,0,0" ManipulationMode="All">
             <tools:JFlipView.ItemTemplate>
@@ -31,8 +32,22 @@
                     <Ellipse Stroke="#f1f1f1" Height="6" Width="6" Margin="10,0"/>
                 </DataTemplate>
             </toolkit:FlipViewIndicator.UnSelectedItemTemplate>
-        </toolkit:FlipViewIndicator>
+        </toolkit:FlipViewIndicator>-->
+        <RatingControl:Rating Height="80" Width="400" x:Name="RatingControl" 
+                                             VerticalAlignment="Center"
+                              Orientation="Horizontal" AllowSelectingZero="True"
+                              Background="Transparent" RatingItemCount="5" Value="3.4" >
 
-        <Button x:Name="Play" Content="Play" Foreground="White" Tapped="Play_Tapped" Margin="200,0"/>
+            <RatingControl:Rating.FilledItemStyle>
+                <Style TargetType="RatingControl:RatingItem">
+                    <Setter Property="Background" Value="Blue" />
+                </Style>
+            </RatingControl:Rating.FilledItemStyle>
+            <RatingControl:Rating.UnfilledItemStyle>
+                <Style TargetType="RatingControl:RatingItem">
+                    <Setter Property="Background" Value="Gray" />
+                </Style>
+            </RatingControl:Rating.UnfilledItemStyle>
+        </RatingControl:Rating>
     </Grid>
 </Page>
