@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
 
-  <Identity Name="e513d23a-b56d-4bf1-9b75-a6442f06836d"
-            Publisher="CN=Jay"
+  <Identity Name="5614b57b-94e6-46f1-aaa3-26b7be842a4a"
+            Publisher="CN=Jaykumar K Daftary"
             Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>App3.Windows</DisplayName>
-    <PublisherDisplayName>Jay</PublisherDisplayName>
+    <DisplayName>TestingLibApp</DisplayName>
+    <PublisherDisplayName>Jaykumar K Daftary</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -23,12 +23,12 @@
   <Applications>
     <Application Id="App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="App3.Windows.App">
+        EntryPoint="TestingLibApp.App">
         <m2:VisualElements
-            DisplayName="App3.Windows"
+            DisplayName="TestingLibApp"
             Square150x150Logo="Assets\Logo.png"
             Square30x30Logo="Assets\SmallLogo.png"
-            Description="App3.Windows"
+            Description="TestingLibApp"
             ForegroundText="light"
             BackgroundColor="#464646">
             <m2:SplashScreen Image="Assets\SplashScreen.png" />

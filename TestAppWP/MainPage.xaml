@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="TestAppWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TestAppWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:tools="using:JISoft.FlipView"        
+    xmlns:toolkit="using:JISoft.Pagination"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot">        
+        <tools:JFlipView x:Name="flipvw" VerticalAlignment="Top" HorizontalAlignment="Stretch" IncrementalLoadingTrigger="Edge"                         
+                           DataFetchSize="2" ItemsSource="{Binding Images}"
+                         IncrementalLoadingThreshold="1"  Margin="0,0,0,0" ManipulationMode="All">
+            <tools:JFlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding ImagePath}" Stretch="Uniform"/>
+                </DataTemplate>
+            </tools:JFlipView.ItemTemplate>
+        </tools:JFlipView>       
+        <toolkit:FlipViewIndicator x:Name="FlipViewInd" PaginationProvider="{Binding ElementName=flipvw}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50">
+            <toolkit:FlipViewIndicator.SelectedItemTemplate>
+                <DataTemplate>
+                    <Ellipse Stroke="White" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" Margin="10,0" StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>
+                </DataTemplate>
+            </toolkit:FlipViewIndicator.SelectedItemTemplate>
+            <toolkit:FlipViewIndicator.UnSelectedItemTemplate>
+                <DataTemplate>
+                    <Ellipse Stroke="#f1f1f1" Height="6" Width="6" Margin="10,0"/>
+                </DataTemplate>
+            </toolkit:FlipViewIndicator.UnSelectedItemTemplate>
+        </toolkit:FlipViewIndicator>
+
+        <Button x:Name="Play" Content="Play" Foreground="White" Tapped="Play_Tapped" Margin="200,0"/>
+    </Grid>
+</Page>
