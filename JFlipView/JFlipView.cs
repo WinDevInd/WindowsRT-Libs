@@ -18,7 +18,7 @@ namespace JISoft.FlipView
     [Version(1)]
     [WebHostHidden]
     public class JFlipView : Windows.UI.Xaml.Controls.FlipView
-    {     
+    {
         public event EventHandler onItemPropertyChanged;
 
         /// <summary>
@@ -54,6 +54,10 @@ namespace JISoft.FlipView
             }
         }
 
+        /// <summary>
+        /// Gets or set if Flipview is busy in adding more item to item source
+        /// Can be identified if flipview is busy with incremental loading of data
+        /// </summary>
         private bool IsBusy
         {
             get;
@@ -117,13 +121,22 @@ namespace JISoft.FlipView
             set;
         }
 
+        /// <summary>
+        /// Selection changed - to identify if flipview reached to end of collection - to trigger Incremental loading
+        /// </summary>
+        /// <param name="sender">Flipview</param>
+        /// <param name="e">Flipview selection changed event arguments</param>
         private async void JFlipView_SelectionChanged(object sender, Windows.UI.Xaml.Controls.SelectionChangedEventArgs e)
         {
             await LoadNextItemAsync();
         }
 
-        // Summary:
-        //      Handle the LazyLoading of items
+        /// <summary>
+        ///  Handle the LazyLoading of items
+        /// </summary>
+        /// <param name="isInitialized">Is called with Flipview's Initialization</param>
+        /// <returns>Task (void)</returns>
+
         async private Task LoadNextItemAsync(bool isInitialized = true)
         {
             try
@@ -160,11 +173,28 @@ namespace JISoft.FlipView
         //      Identifies when to trigger IncrementalLoading
         private bool CanIncrementalLoadigTrigger()
         {
-            if (!IsBusy && IncrementalLoadingTrigger == IncrementalLoadingTrigger.Edge && (this.Items.Count - this.SelectedIndex) <= (DataFetchSize * IncrementalLoadingThreshold))
+            if (!IsBusy && IncrementalLoadingTrigger == IncrementalLoadingTrigger.Edge
+                && (this.Items.Count - this.SelectedIndex) <= (DataFetchSize * IncrementalLoadingThreshold))
             {
                 return true;
             }
             return false;
+        }
+
+        public void Dispose()
+        {
+            try
+            {
+                this.SelectionChanged -= JFlipView_SelectionChanged;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception occurend in Flipview Dispose " + e.Message + " Stack trace : " + e.StackTrace + " - Please report this to developer on nuget");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }
