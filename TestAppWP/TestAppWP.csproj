@@ -125,8 +125,9 @@
     <Reference Include="IncrementalLoadingCollections">
       <HintPath>..\packages\JISoft.Collections.1.1.0.1\lib\wpa81\IncrementalLoadingCollections.dll</HintPath>
     </Reference>
-    <Reference Include="JFlipView">
-      <HintPath>..\packages\JISoft.FlipView.1.2.0.0\lib\wpa81\JFlipView.dll</HintPath>
+    <Reference Include="JFlipView, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JISoft.FlipView.1.2.2\lib\portable-wpa81+win81\JFlipView.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

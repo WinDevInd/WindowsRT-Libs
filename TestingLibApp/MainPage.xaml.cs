@@ -47,8 +47,8 @@ namespace TestingLibApp
             {
                 Images.Add(new ImageModel() { ImagePath = "/Assets/WinLogos/" + i + ".jpg" });
             }
-            this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
-            this.FlipViewInd.Play();
+            //this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
+            //this.FlipViewInd.Play();
         }
 
         private void FlipViewIndicator_Loaded(object sender, RoutedEventArgs e)
@@ -62,17 +62,17 @@ namespace TestingLibApp
 
         private void Play_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            FlipViewInd.Play();
+            //FlipViewInd.Play();
         }
 
         private void Pause_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            FlipViewInd.Pause();
+            //FlipViewInd.Pause();
         }
 
         private void Stop_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            FlipViewInd.Stop();
+            //FlipViewInd.Stop();
         }        
     }
 }

@@ -145,15 +145,15 @@
     <Reference Include="IncrementalLoadingCollections">
       <HintPath>..\packages\JISoft.Collections.1.1.0.1\lib\netcore451\IncrementalLoadingCollections.dll</HintPath>
     </Reference>
+    <Reference Include="JFlipView, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\JISoft.FlipView.1.2.2\lib\portable-wpa81+win81\JFlipView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlipViewIndicator\FlipViewIndicator.csproj">
       <Project>{b27f98bf-7ac5-48f9-a0d8-2f0c791dbbea}</Project>
       <Name>FlipViewIndicator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\JFlipView\JFlipView.csproj">
-      <Project>{ba07be85-2ce2-4888-8bed-a0098bd34be6}</Project>
-      <Name>JFlipView</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

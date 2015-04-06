@@ -20,10 +20,10 @@
             </tools:JFlipView.ItemTemplate>
         </tools:JFlipView>
 
-        <toolkit:FlipViewIndicator x:Name="FlipViewInd" IndicatorSource="{Binding Images}" PaginationProvider="{Binding ElementName=flipvw}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50">
+        <!--<toolkit:FlipViewIndicator x:Name="FlipViewInd" IndicatorSource="{Binding Images}" PaginationProvider="{Binding ElementName=flipvw}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50">
             <toolkit:FlipViewIndicator.SelectedItemTemplate>
                 <DataTemplate>
-                    <!--Ellipse Stroke="{Binding Color}" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>-->
+                    --><!--Ellipse Stroke="{Binding Color}" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>--><!--
                     <Border BorderThickness="1" BorderBrush="#f1f1f1">
                         <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="30"/>
                     </Border>
@@ -36,6 +36,6 @@
                     </Border>
                 </DataTemplate>
             </toolkit:FlipViewIndicator.UnSelectedItemTemplate>
-        </toolkit:FlipViewIndicator>
+        </toolkit:FlipViewIndicator>-->
     </Grid>
 </Page>
