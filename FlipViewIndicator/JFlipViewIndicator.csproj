@@ -26,6 +26,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -109,6 +111,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BooleanToScaleConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="FlipViewIndicator.xaml.cs">
       <DependentUpon>FlipViewIndicator.xaml</DependentUpon>
     </Compile>
