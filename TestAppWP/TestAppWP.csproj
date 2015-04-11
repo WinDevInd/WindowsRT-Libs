@@ -138,9 +138,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlipViewIndicator\FlipViewIndicator.csproj">
+    <ProjectReference Include="..\FlipViewIndicator\JFlipViewIndicator.csproj">
       <Project>{b27f98bf-7ac5-48f9-a0d8-2f0c791dbbea}</Project>
-      <Name>FlipViewIndicator</Name>
+      <Name>JFlipViewIndicator</Name>
     </ProjectReference>
     <ProjectReference Include="..\JFlipView\JFlipView.csproj">
       <Project>{ba07be85-2ce2-4888-8bed-a0098bd34be6}</Project>

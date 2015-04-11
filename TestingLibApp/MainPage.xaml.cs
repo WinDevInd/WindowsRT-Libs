@@ -69,6 +69,16 @@ namespace TestingLibApp
 
         private void Stop_Tapped(object sender, TappedRoutedEventArgs e)
         {
+        }
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("UnSelected Tapped");
+        }
+
+        private void Image_Tapped_1(object sender, TappedRoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Selected Tapped");
         }        
     }
 }
