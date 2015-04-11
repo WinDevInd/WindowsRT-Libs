@@ -159,9 +159,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlipViewIndicator\FlipViewIndicator.csproj">
+    <ProjectReference Include="..\FlipViewIndicator\JFlipViewIndicator.csproj">
       <Project>{b27f98bf-7ac5-48f9-a0d8-2f0c791dbbea}</Project>
-      <Name>FlipViewIndicator</Name>
+      <Name>JFlipViewIndicator</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
