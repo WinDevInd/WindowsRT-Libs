@@ -7,13 +7,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncrementalLoadingCollectio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFlipView", "JFlipView\JFlipView.csproj", "{BA07BE85-2CE2-4888-8BED-A0098BD34BE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlipViewIndicator", "FlipViewIndicator\FlipViewIndicator.csproj", "{B27F98BF-7AC5-48F9-A0D8-2F0C791DBBEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JFlipViewIndicator", "FlipViewIndicator\JFlipViewIndicator.csproj", "{B27F98BF-7AC5-48F9-A0D8-2F0C791DBBEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppWP", "TestAppWP\TestAppWP.csproj", "{1BCA27AD-59D8-492E-9F62-BF10F4F410A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JRatingControl", "RatingControl\JRatingControl.csproj", "{8477BBCD-D895-4BD7-BFF7-C44E45A0B671}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingLibApp", "TestingLibApp\TestingLibApp.csproj", "{81D3E1B8-6A53-4B12-924B-0CF093711048}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinRTHtmlControl", "WinRTHtmlControl\WinRTHtmlControl.csproj", "{1119CEB9-78AD-4521-A08D-04B14420358E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,16 @@ Global
 		{81D3E1B8-6A53-4B12-924B-0CF093711048}.Release|x86.ActiveCfg = Release|x86
 		{81D3E1B8-6A53-4B12-924B-0CF093711048}.Release|x86.Build.0 = Release|x86
 		{81D3E1B8-6A53-4B12-924B-0CF093711048}.Release|x86.Deploy.0 = Release|x86
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Release|x64.ActiveCfg = Release|Any CPU
+		{1119CEB9-78AD-4521-A08D-04B14420358E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
