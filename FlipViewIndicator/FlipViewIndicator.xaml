@@ -15,6 +15,7 @@
     <UserControl.Resources>
         <Converter:BooleanToVisibilityConverter x:Name="BooleanToVisibilityConverter"/>
         <Converter:BooleanToScaleConverter x:Name="BooleanToScaleConverter"/>
+        
         <Style x:Key="ListViewItemIndicatorStyle" TargetType="ListViewItem">
             <Setter Property="HorizontalAlignment" Value="{Binding HorizontalContentAlignment,ElementName=IndicatorControl}"/>
             <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment,ElementName=IndicatorControl}"/>
@@ -69,7 +70,7 @@
         Margin="{Binding IndicatorMargin,ElementName=IndicatorControl}"
         ItemsSource="{Binding IndicatorSource,ElementName=IndicatorControl}"
         SelectionChanged="ListViewIndicator_SelectionChanged"
-        ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+        ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
         ScrollViewer.HorizontalScrollMode="Enabled" ItemContainerStyle="{StaticResource ListViewItemIndicatorStyle}" 
         IsActiveView="True" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" ManipulationMode="All" SelectionMode="Extended" IsSwipeEnabled="False" TabNavigation="Local">
         <ListView.ItemsPanel>
