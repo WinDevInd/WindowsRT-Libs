@@ -18,6 +18,15 @@ using Windows.UI.Xaml.Navigation;
 
 namespace TestAppWP
 {
+
+    public class FKPivotItem : PivotItem
+    {
+        public FKPivotItem()
+        {
+            base.DefaultStyleKey = typeof(FKPivotItem);
+        }
+    }
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -36,16 +45,43 @@ namespace TestAppWP
             get;
             set;
         }
-        
+
         public MainPage()
         {
             this.DataContext = this;
             this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;            
+            //this.NavigationCacheMode = NavigationCacheMode.Required;
             //this.flipvw1.ItemsSource = Images;
+            Images = new ObservableCollection<ImageModel>();
+            for (int i = 2; i <= 9; i++)
+            {
+                Images.Add(new ImageModel() { ImagePath = "/Assets/WinLogos/" + i + ".jpg" });
+            }
+            this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
 
         }
 
+        private void FlipViewIndicator_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Back_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //this.Frame.Navigate(typeof(BlankPage1));
+            this.Frame.GoBack();
+        }
+
+        private void Play_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+        }
+
+        private void Pause_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+        }
+
+        private void Stop_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+        }        
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -53,17 +89,9 @@ namespace TestAppWP
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Images = new ObservableCollection<ImageModel>();
-            for (int i = 2; i <= 9; i++)
-            {
-                Images.Add(new ImageModel() { ImagePath = "Assets/WinLogos/" + i + ".jpg" });
-            }
-            this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);         
+
         }
 
-        private void Play_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            this.FlipViewInd.Play();
-        }
+
     }
 }

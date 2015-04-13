@@ -5,28 +5,62 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"    
+    mc:Ignorable="d"
+    xmlns:Converter="using:JISoft.Pagination.Converters"
     x:Name="IndicatorControl"
     d:DesignHeight="200" d:DesignWidth="480"    
     Loaded="IndicatorControl_Loaded"
     Unloaded="IndicatorControl_Unloaded">
-    <UserControl.Resources>
 
-        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+    <UserControl.Resources>
+        <Converter:BooleanToVisibilityConverter x:Name="BooleanToVisibilityConverter"/>
+        <Converter:BooleanToScaleConverter x:Name="BooleanToScaleConverter"/>
+        
+        <Style x:Key="ListViewItemIndicatorStyle" TargetType="ListViewItem">
+            <Setter Property="HorizontalAlignment" Value="{Binding HorizontalContentAlignment,ElementName=IndicatorControl}"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment,ElementName=IndicatorControl}"/>
+            <Setter Property="VerticalAlignment" Value="{Binding VerticalContentAlignment,ElementName=IndicatorControl}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment,ElementName=IndicatorControl}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ContentPresenter ContentTransitions="{TemplateBinding ContentTransitions}" 
-                                          Content="{TemplateBinding Content}"/>
+                        <Grid>
+                            <ContentPresenter ContentTemplate="{Binding UnSelectedItemTemplate, ElementName=IndicatorControl}"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                          
+                                              RenderTransformOrigin="0.5,0.5">
+                                <ContentPresenter.RenderTransform>
+                                    <CompositeTransform 
+                                        ScaleX="{Binding IsSelected,Converter={StaticResource BooleanToScaleConverter},ConverterParameter='reverse',RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        ScaleY="{Binding IsSelected,Converter={StaticResource BooleanToScaleConverter},ConverterParameter='reverse',RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                </ContentPresenter.RenderTransform>
+                                
+                            </ContentPresenter>
+
+                            <ContentPresenter ContentTemplate="{Binding SelectedItemTemplate, ElementName=IndicatorControl}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              Content="{TemplateBinding Content}"  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                             
+                                              RenderTransformOrigin="0.5,0.5">
+                                <ContentPresenter.RenderTransform>
+                                    <CompositeTransform 
+                                        ScaleX="{Binding IsSelected,Converter={StaticResource BooleanToScaleConverter},RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        ScaleY="{Binding IsSelected,Converter={StaticResource BooleanToScaleConverter},RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+
+
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <ListView
         x:Name="ListViewIndicator"
-        x:FieldModifier="private"
+        x:FieldModifier="protected"
         Background="{Binding IndicatorBackground,ElementName=IndicatorControl}"
         IncrementalLoadingTrigger="None"
         HorizontalAlignment="Stretch"
@@ -34,12 +68,11 @@
         HorizontalContentAlignment="{Binding HorizontalContentAlignment,ElementName=IndicatorControl}"
         VerticalContentAlignment="{Binding VerticalContentAlignment,ElementName=IndicatorControl}"
         Margin="{Binding IndicatorMargin,ElementName=IndicatorControl}"
-        ItemTemplateSelector="{Binding IndicatorSelector, ElementName=IndicatorControl}"
-        ItemsSource="{Binding IndicatorItemSource,ElementName=IndicatorControl}"        
-        SelectionMode="Single"        
+        ItemsSource="{Binding IndicatorSource,ElementName=IndicatorControl}"
         SelectionChanged="ListViewIndicator_SelectionChanged"
-        ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" 
-        ItemContainerStyle="{StaticResource ListViewItemStyle}">
+        ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+        ScrollViewer.HorizontalScrollMode="Enabled" ItemContainerStyle="{StaticResource ListViewItemIndicatorStyle}" 
+        IsActiveView="True" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" ManipulationMode="All" SelectionMode="Extended" IsSwipeEnabled="False" TabNavigation="Local">
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
                 <ItemsStackPanel Orientation="Horizontal" Background="{Binding ItemsPanelBackground,ElementName=IndicatorControl}" 
