@@ -32,5 +32,11 @@ namespace JISoft.Pagination
                 }
             }
         }
+
+        public object Provider
+        {
+            get;
+            set;
+        }
     }
 }
