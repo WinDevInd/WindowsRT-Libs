@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="JISoft.Pagination.FlipViewIndicator"
+    x:Class="JISoft.Pagination.JFlipViewIndicator"
     xmlns:local="clr-namespace:FlipViewIndicator"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    

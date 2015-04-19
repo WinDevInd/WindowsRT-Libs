@@ -1,5 +1,5 @@
 ﻿//----------------------------------------------------------------------------------------------
-// <copyright file="PaginationIndicator.cs" company="JISoft" Owner="Jaykumar K Daftary">
+// <copyright file="JFlipViewIndicator.cs" company="JISoft" Owner="Jaykumar K Daftary">
 // MS-Pl licensed 
 // </copyright>
 //-------------------------------------------------------------------------------------------------
@@ -25,20 +25,20 @@ namespace JISoft.Pagination
     using Windows.UI.Xaml.Media;
     using Windows.UI.Xaml.Navigation;
 
-    public sealed partial class FlipViewIndicator : UserControl, IDisposable
+    public sealed partial class JFlipViewIndicator : UserControl, IDisposable
     {
         private DispatcherTimer timer;
         private bool shouldResumeSlideShow;
         private bool isSlideShowPlayingInitid = false;
 
-        public FlipViewIndicator()
+        public JFlipViewIndicator()
         {
             this.InitializeComponent();
             this.ListViewIndicator.DataContext = this;
             this.Initialize();
         }
 
-        ~FlipViewIndicator()
+        ~JFlipViewIndicator()
         {
             System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>> FlipView Indicator disposed <<<<<<<<<<<<<<<<<");
         }
@@ -201,31 +201,31 @@ namespace JISoft.Pagination
         #region DependencyProperty Declaration
 
         public static readonly DependencyProperty IndicatorMarginProperty =
-            DependencyProperty.Register("IndicatorMargin", typeof(Thickness), typeof(FlipViewIndicator),
+            DependencyProperty.Register("IndicatorMargin", typeof(Thickness), typeof(JFlipViewIndicator),
             new PropertyMetadata(new Thickness(0)));
 
         public static readonly DependencyProperty IndicatorStyleProperty =
-            DependencyProperty.Register("IndicatorStyle", typeof(Style), typeof(FlipViewIndicator),
+            DependencyProperty.Register("IndicatorStyle", typeof(Style), typeof(JFlipViewIndicator),
             new PropertyMetadata(0));
 
         public static readonly DependencyProperty IndicatorPaddingProperty =
-            DependencyProperty.Register("IndicatorPadding", typeof(Thickness), typeof(FlipViewIndicator),
+            DependencyProperty.Register("IndicatorPadding", typeof(Thickness), typeof(JFlipViewIndicator),
             new PropertyMetadata(new Thickness(0)));
 
         public static readonly DependencyProperty PaginationProviderProperty =
-            DependencyProperty.Register("PaginationProvider", typeof(object), typeof(FlipViewIndicator),
+            DependencyProperty.Register("PaginationProvider", typeof(object), typeof(JFlipViewIndicator),
             new PropertyMetadata(null, OnIndicatorProviderChanged));
 
         public static readonly DependencyProperty IndicatorBackgroundProperty =
-           DependencyProperty.Register("IndicatorBackground", typeof(Brush), typeof(FlipViewIndicator),
+           DependencyProperty.Register("IndicatorBackground", typeof(Brush), typeof(JFlipViewIndicator),
            new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
 
         public static readonly DependencyProperty ItemsPanelBackgroundProperty =
-            DependencyProperty.Register("ItemsPanelBackground", typeof(Brush), typeof(FlipViewIndicator),
+            DependencyProperty.Register("ItemsPanelBackground", typeof(Brush), typeof(JFlipViewIndicator),
             new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
 
         public static readonly DependencyProperty IndicatorSourceProperty =
-           DependencyProperty.Register("IndicatorSource", typeof(object), typeof(FlipViewIndicator),
+           DependencyProperty.Register("IndicatorSource", typeof(object), typeof(JFlipViewIndicator),
            new PropertyMetadata(null, IndicatorItemSourceChanged));
 
 
@@ -238,7 +238,7 @@ namespace JISoft.Pagination
         /// </summary>
         private static void IndicatorItemSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            FlipViewIndicator indicatorControl = d as FlipViewIndicator;
+            JFlipViewIndicator indicatorControl = d as JFlipViewIndicator;
             if (indicatorControl != null)
             {
 
@@ -254,7 +254,7 @@ namespace JISoft.Pagination
         /// <summary> 
         private static void OnIndicatorProviderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            FlipViewIndicator indicatorControl = d as FlipViewIndicator;
+            JFlipViewIndicator indicatorControl = d as JFlipViewIndicator;
             if (indicatorControl != null)
             {
                 if (indicatorControl.IndicatorProvider == null)
@@ -356,7 +356,7 @@ namespace JISoft.Pagination
 
         private void timer_Tick(object sender, object e)
         {
-            if (this.IndicatorProvider != null && this.IndicatorProvider.Items.Count > 1)
+            if (this.IndicatorProvider != null && this.IndicatorProvider.Items != null && this.IndicatorProvider.Items.Count > 1)
             {
                 if (this.IndicatorProvider.SelectedIndex == this.IndicatorProvider.Items.Count - 1)
                 {

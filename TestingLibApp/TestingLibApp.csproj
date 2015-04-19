@@ -157,12 +157,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JISoft.FlipView.1.2.2\lib\portable-wpa81+win81\JFlipView.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FlipViewIndicator\JFlipViewIndicator.csproj">
-      <Project>{b27f98bf-7ac5-48f9-a0d8-2f0c791dbbea}</Project>
-      <Name>JFlipViewIndicator</Name>
-    </ProjectReference>
+    <Reference Include="JFlipViewIndicator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JISoft.FlipViewIndicator.1.0.0.3\lib\portable-wpa81+win81\JFlipViewIndicator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

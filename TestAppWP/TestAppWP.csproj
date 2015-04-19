@@ -129,6 +129,14 @@
     <Reference Include="IncrementalLoadingCollections">
       <HintPath>..\packages\JISoft.Collections.1.1.0.1\lib\wpa81\IncrementalLoadingCollections.dll</HintPath>
     </Reference>
+    <Reference Include="JFlipView, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JISoft.FlipView.1.2.2\lib\portable-wpa81+win81\JFlipView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JFlipViewIndicator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JISoft.FlipViewIndicator.1.0.0.3\lib\portable-wpa81+win81\JFlipViewIndicator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="JRatingControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl.dll</HintPath>
@@ -136,16 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FlipViewIndicator\JFlipViewIndicator.csproj">
-      <Project>{b27f98bf-7ac5-48f9-a0d8-2f0c791dbbea}</Project>
-      <Name>JFlipViewIndicator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\JFlipView\JFlipView.csproj">
-      <Project>{ba07be85-2ce2-4888-8bed-a0098bd34be6}</Project>
-      <Name>JFlipView</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

@@ -40,7 +40,7 @@ namespace TestAppWP
                 set;
             }
         }
-        public ObservableCollection<ImageModel> Images
+        public List<ImageModel> Images
         {
             get;
             set;
@@ -48,16 +48,21 @@ namespace TestAppWP
 
         public MainPage()
         {
-            this.DataContext = this;
-            this.InitializeComponent();
-            //this.NavigationCacheMode = NavigationCacheMode.Required;
-            //this.flipvw1.ItemsSource = Images;
-            Images = new ObservableCollection<ImageModel>();
+            Images = new List<ImageModel>();
             for (int i = 2; i <= 9; i++)
             {
                 Images.Add(new ImageModel() { ImagePath = "/Assets/WinLogos/" + i + ".jpg" });
             }
+            InitializeComponent();
+            this.flipvw.ItemsSource = Images;
+
+            this.FlipViewInd.PaginationProvider = flipvw;
+            this.FlipViewInd.IndicatorSource = Images;
+           
             this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
+           
+            this.FlipViewInd.IndicatorSource = null;
+            this.FlipViewInd.IndicatorSource = Images;
 
         }
 

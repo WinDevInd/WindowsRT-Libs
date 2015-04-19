@@ -32,7 +32,7 @@ namespace TestingLibApp
             }
         }
 
-        public ObservableCollection<ImageModel> Images
+        public List<ImageModel> Images
         {
             get;
             set;
@@ -42,12 +42,17 @@ namespace TestingLibApp
         {
             this.DataContext = this;
             this.InitializeComponent();
-            Images = new ObservableCollection<ImageModel>();
+            Images = new List<ImageModel>();
+            this.FlipViewInd.PaginationProvider = flipvw;
+            this.FlipViewInd.IndicatorSource = Images;
+            this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
             for (int i = 2; i <= 9; i++)
             {
                 Images.Add(new ImageModel() { ImagePath = "/Assets/WinLogos/" + i + ".jpg" });
             }
-            this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
+            this.FlipViewInd.IndicatorSource = null;
+            this.FlipViewInd.IndicatorSource = Images;
+            
         }
 
         private void FlipViewIndicator_Loaded(object sender, RoutedEventArgs e)

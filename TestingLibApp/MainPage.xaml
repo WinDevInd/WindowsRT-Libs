@@ -20,24 +20,24 @@
             </tools:JFlipView.ItemTemplate>
         </tools:JFlipView>
 
-        <toolkit:FlipViewIndicator x:Name="FlipViewInd" IsSlideShowPlaying="true"  IndicatorSource="{Binding Images}" PaginationProvider="{Binding ElementName=flipvw}" 
+        <toolkit:JFlipViewIndicator x:Name="FlipViewInd" IsSlideShowPlaying="true"
                                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50" SlideShowTimeSpan="0:0:5">
-            <toolkit:FlipViewIndicator.SelectedItemTemplate>
+            <toolkit:JFlipViewIndicator.SelectedItemTemplate>
                 <DataTemplate>
                     <!--Ellipse Stroke="{Binding Color}" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>-->
                     <Border BorderThickness="1" BorderBrush="#f1f1f1">
                         <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="30" Tapped="Image_Tapped_1"/>
                     </Border>
                 </DataTemplate>
-            </toolkit:FlipViewIndicator.SelectedItemTemplate>
-            <toolkit:FlipViewIndicator.UnSelectedItemTemplate>
+            </toolkit:JFlipViewIndicator.SelectedItemTemplate>
+            <toolkit:JFlipViewIndicator.UnSelectedItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="0" Margin="1" BorderBrush="Transparent">
                         <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="30" Tapped="Image_Tapped"/>
                     </Border>
                 </DataTemplate>
-            </toolkit:FlipViewIndicator.UnSelectedItemTemplate>
-        </toolkit:FlipViewIndicator>
+            </toolkit:JFlipViewIndicator.UnSelectedItemTemplate>
+        </toolkit:JFlipViewIndicator>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Tapped="Back_Tapped"/>
 
     </Grid>
