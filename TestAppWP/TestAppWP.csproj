@@ -145,6 +145,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PowerToolKit\PowerToolKit.csproj">
+      <Project>{8ef3d159-b080-4868-ae8f-b9cc8a63682e}</Project>
+      <Name>PowerToolKit</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

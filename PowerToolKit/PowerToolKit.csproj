@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8EF3D159-B080-4868-AE8F-B9CC8A63682E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JISoft.PowerToolKit</RootNamespace>
+    <AssemblyName>PowerToolKit</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile32</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
+    <TargetPlatform Include="Windows, Version=8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\HTMLControls\HTMLViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\FlipviewIndicator\JFlipViewIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\HTMLControls\HTMLViewer.xaml.cs">
+      <DependentUpon>HTMLViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HTMLControls\HyperlinkClickEventArgs.cs" />
+    <Compile Include="Controls\HTMLControls\ImageClickEventArgs.cs" />
+    <Compile Include="Controls\FlipView\JFlipView.cs" />
+    <Compile Include="Controls\FlipviewIndicator\JFlipViewIndicator.xaml.cs" />
+    <Compile Include="Controls\RatingControls\Rating.cs" />
+    <Compile Include="Controls\RatingControls\RatingItem.cs" />
+    <Compile Include="Controls\Panels\OrientedSize.cs" />
+    <Compile Include="Controls\Panels\WrapPanel.cs" />
+    <Compile Include="Converters\BooleanToScaleConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="CustomCollections\Constants.cs" />
+    <Compile Include="CustomCollections\ObservableList.cs" />
+    <Compile Include="HTMLTools\HtmlCssParser.cs" />
+    <Compile Include="HTMLTools\HtmlFromXamlConverter.cs" />
+    <Compile Include="HTMLTools\HtmlLexicalAnalyzer.cs" />
+    <Compile Include="HTMLTools\HtmlParser.cs" />
+    <Compile Include="HTMLTools\HtmlSchema.cs" />
+    <Compile Include="HTMLTools\HtmlTokenType.cs" />
+    <Compile Include="HTMLTools\HtmlToXamlConverter.cs" />
+    <Compile Include="HTMLTools\StringHTMLAdditions.cs" />
+    <Compile Include="ILCollections\IncrementalLoadingCollection.cs" />
+    <Compile Include="ILCollections\IncrementalLoadingList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
