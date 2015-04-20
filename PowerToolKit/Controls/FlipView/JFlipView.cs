@@ -15,8 +15,6 @@ namespace JISoft.Controls
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Data;
 
-    [Version(1)]
-    [WebHostHidden]
     public class JFlipView : Windows.UI.Xaml.Controls.FlipView
     {
         public event EventHandler onItemPropertyChanged;

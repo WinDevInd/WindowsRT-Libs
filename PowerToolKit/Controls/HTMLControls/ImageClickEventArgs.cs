@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Windows.UI.Xaml.Media;
 
-namespace JISoft.Controls.HTMLControls
+namespace JISoft.Controls
 {
     public class ImageClickEventArgs : EventArgs
     {

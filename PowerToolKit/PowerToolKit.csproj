@@ -62,8 +62,8 @@
     <Compile Include="Controls\HTMLControls\ImageClickEventArgs.cs" />
     <Compile Include="Controls\FlipView\JFlipView.cs" />
     <Compile Include="Controls\FlipviewIndicator\JFlipViewIndicator.xaml.cs" />
-    <Compile Include="Controls\RatingControls\Rating.cs" />
-    <Compile Include="Controls\RatingControls\RatingItem.cs" />
+    <Compile Include="Controls\RatingControl\Rating.cs" />
+    <Compile Include="Controls\RatingControl\RatingItem.cs" />
     <Compile Include="Controls\Panels\OrientedSize.cs" />
     <Compile Include="Controls\Panels\WrapPanel.cs" />
     <Compile Include="Converters\BooleanToScaleConverter.cs" />

@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace JISoft.Controls
 {
-    internal class RatingItem : Control
+    public class RatingItem : Control
     {
         /// <summary>
         /// Initializes a new instance of the RatingItem type.

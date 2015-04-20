@@ -4,6 +4,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using JISoft.Controls.Panels;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -12,7 +13,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace JISoft.Controls.Panels
+namespace JISoft.Controls
 {
     /// <summary>
     /// Positions child elements sequentially from left to right or top to

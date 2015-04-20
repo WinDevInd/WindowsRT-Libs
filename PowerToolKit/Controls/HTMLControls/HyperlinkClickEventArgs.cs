@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JISoft.Controls.HTMLControls
+namespace JISoft.Controls
 {
     public class HyperlinkClickEventArgs : EventArgs
     {

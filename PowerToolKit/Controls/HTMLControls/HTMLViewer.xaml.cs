@@ -17,7 +17,7 @@ using Windows.Storage.Streams;
 using Windows.UI;
 using JISoft.HTMLTools;
 
-namespace JISoft.Controls.HTMLControls
+namespace JISoft.Controls
 {
     public partial class HTMLViewer : UserControl
     {
