@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" Height="700" Width="400">
         <!--<Controls:JFlipView x:Name="flipvw" VerticalAlignment="Top" HorizontalAlignment="Stretch" IncrementalLoadingTrigger="Edge" 
 			DataFetchSize="2" ItemsSource="{Binding Images}"
 			IncrementalLoadingThreshold="1"  Margin="0,0,0,0" Background="#FF444747" ManipulationMode="All">
@@ -45,14 +45,15 @@
         </Controls:JFlipViewIndicator>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Tapped="Back_Tapped"/>-->
       
-        <Controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+        <!--<Controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Controls:Rating RatingItemCount="2" Value="1.6" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="40" Width="80"/>
             <Controls:Rating RatingItemCount="2" Value="1.6" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="40" Width="80"/>
             <Controls:Rating RatingItemCount="2" Value="1.6" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="40" Width="80"/>
             <Controls:Rating RatingItemCount="2" Value="1.6" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="40" Width="80"/>
             <Controls:Rating RatingItemCount="2" Value="1.6" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="40" Width="80"/>
             <Controls:Rating RatingItemCount="2" Value="1.6" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="40" Width="80"/>
-            <Controls:HTMLViewer x:Name="HTMLTextbox" FontSize="30" Margin="70" Foreground="Red" Background="White"/>
-        </Controls:WrapPanel>
+        </Controls:WrapPanel>-->
+        <Controls:HTMLViewer x:Name="HTMLTextbox" FontSize="30" Foreground="Red" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
     </Grid>
 </Page>

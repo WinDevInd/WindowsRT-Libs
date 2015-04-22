@@ -16,11 +16,13 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Storage.Streams;
 using Windows.UI;
 using JISoft.HTMLTools;
+using System.Threading.Tasks;
 
 namespace JISoft.Controls
 {
     public partial class HTMLViewer : UserControl
     {
+        private object lockObj = new object();
         public HTMLViewer()
         {
             InitializeComponent();
@@ -63,58 +65,75 @@ namespace JISoft.Controls
 
         private async void OnHtmlPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            string newVal = "";
-            if (string.IsNullOrWhiteSpace((string)e.NewValue))
+            try
             {
-                return;
-            }
-            newVal = e.NewValue as string;
-            await Windows.System.Threading.ThreadPool.RunAsync((workItem) =>
-             {
-                 lock (this)
+                string newVal = "";
+                if (string.IsNullOrWhiteSpace((string)e.NewValue))
+                {
+                    return;
+                }
+                newVal = e.NewValue as string;
+                await Task.Run(() =>
                  {
-
-                     var xamlXml = HtmlToXamlConverter.ConvertHtmlToXamlInternal(newVal, false);
-                     devideParagraphs(xamlXml);
-                     foreach (var hyperlink in xamlXml.Descendants(XName.Get(HtmlToXamlConverter.Xaml_Hyperlink, HtmlToXamlConverter._xamlNamespace)))
+                     lock (lockObj)
                      {
-                         if (hyperlink.Attribute(HtmlToXamlConverter.Xaml_Foreground) == null)
+                         var xamlXml = HtmlToXamlConverter.ConvertHtmlToXamlInternal(newVal, false);
+                         devideParagraphs(xamlXml);
+                         foreach (var hyperlink in xamlXml.Descendants(XName.Get(HtmlToXamlConverter.Xaml_Hyperlink, HtmlToXamlConverter._xamlNamespace)))
                          {
-                             hyperlink.SetAttributeValue(XName.Get(HtmlToXamlConverter.Xaml_Foreground, HtmlToXamlConverter._xamlNamespace), @"Transparent");
-                         }
-                     }
-                     Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                     {
-                         String s = "<RichTextBlock xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">\n" + xamlXml
-                             + "</RichTextBlock>\n";
-
-                         //var section = XamlReader.Load(xamlXml.ToString()) as Windows.UI.Xaml.Documents.BlockCollection;
-                         RichTextBlock rtb = XamlReader.Load(s) as RichTextBlock;
-                         LayoutRoot.Children.Clear();
-                         Scroll.ScrollToVerticalOffset(0);
-                         Binding b = new Binding();
-                         b.Path = new PropertyPath("FontSize");
-                         b.Source = this;
-                         rtb.SetBinding(RichTextBlock.FontSizeProperty, b);
-                         b = new Binding();
-                         b.Path = new PropertyPath("Foreground");
-                         b.Source = this;
-                         rtb.SetBinding(RichTextBlock.ForegroundProperty, b);
-                         LayoutRoot.Children.Add(rtb);
-                         if (rtb.Blocks != null)
-                         {
-                             foreach (var block in rtb.Blocks)
+                             if (hyperlink.Attribute(HtmlToXamlConverter.Xaml_Foreground) == null)
                              {
-                                 var p = block as Paragraph;
-                                 if (p != null)
-                                 {
-                                     postParseInlinesSettings(p.Inlines);
-                                 }
+                                 hyperlink.SetAttributeValue(XName.Get(HtmlToXamlConverter.Xaml_Foreground, HtmlToXamlConverter._xamlNamespace), @"Transparent");
                              }
                          }
-                     });
-                 }
-             });
+
+                         Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                         {
+                             try
+                             {
+                                 
+                                 String s = "<RichTextBlock xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">\n" + xamlXml
+                                     + "</RichTextBlock>\n";
+
+                                 //var section = XamlReader.Load(xamlXml.ToString()) as Windows.UI.Xaml.Documents.BlockCollection;
+                                 RichTextBlock rtb = XamlReader.Load(s) as RichTextBlock;
+                                 rtb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+                                 rtb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+                                 LayoutRoot.Children.Clear();
+                                 Scroll.ChangeView(0, 0, 1);
+                                 Binding b = new Binding();
+                                 b.Path = new PropertyPath("FontSize");
+                                 b.Source = this;
+                                 rtb.SetBinding(RichTextBlock.FontSizeProperty, b);
+                                 b = new Binding();
+                                 b.Path = new PropertyPath("Foreground");
+                                 b.Source = this;
+                                 rtb.SetBinding(RichTextBlock.ForegroundProperty, b);
+                                 LayoutRoot.Children.Add(rtb);
+                                 if (rtb.Blocks != null)
+                                 {
+                                     foreach (var block in rtb.Blocks)
+                                     {
+                                         var p = block as Paragraph;
+                                         if (p != null)
+                                         {
+                                             postParseInlinesSettings(p.Inlines);
+                                         }
+                                     }
+                                 }
+                             }
+                             catch
+                             {
+
+                             }
+                         });
+                     }
+                 });
+            }
+            catch
+            {
+
+            }
         }
 
         // divide paragraphs by lineBreaks. It lets to show long paragraph in different rtb'es withot any visual issues

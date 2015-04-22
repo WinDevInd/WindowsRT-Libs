@@ -68,8 +68,7 @@ using System.Windows;
 
             // Create an XmlDocument for generated xaml
             XDocument xamlTree = new XDocument();
-            XElement xamlFlowDocumentElement = new XElement(XName.Get(rootElementName, _xamlNamespace));
-            //XElement xamlFlowDocumentElement = new XElement(XName.Get(rootElementName));
+            XElement xamlFlowDocumentElement = new XElement(XName.Get(rootElementName)); //// changed required - to remove xaml namespace from property element <RichTextBlock.Blocks>
 
             // Extract style definitions from all STYLE elements in the document
             CssStylesheet stylesheet = new CssStylesheet(htmlElement);
@@ -370,8 +369,8 @@ using System.Windows;
                 Dictionary<Object,Object> currentProperties = GetElementProperties(htmlElement, inheritedProperties, out localProperties, stylesheet, sourceContext);
 
                 // Create a XAML element corresponding to this html element
-                //XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Section, _xamlNamespace));
-                XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Section));
+                XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Section, _xamlNamespace));
+                //XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Section));
                 ApplyLocalProperties(xamlElement, localProperties, /*isBlock:*/true);
 
                 // Decide whether we can unwrap this element as not having any formatting significance.
@@ -420,7 +419,7 @@ using System.Windows;
             Dictionary<Object,Object> currentProperties = GetElementProperties(htmlElement, inheritedProperties, out localProperties, stylesheet, sourceContext);
 
             // Create a XAML element corresponding to this html element
-            XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Paragraph)); // changed
+            XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Paragraph,_xamlNamespace));
             ApplyLocalProperties(xamlElement, localProperties, /*isBlock:*/true);
 
             // Recurse into element subtree
@@ -456,7 +455,7 @@ using System.Windows;
         private static XNode AddImplicitParagraph(XElement xamlParentElement, XNode htmlNode, Dictionary<Object,Object> inheritedProperties, CssStylesheet stylesheet, List<XElement> sourceContext)
         {
             // Collect all non-block elements and wrap them into implicit Paragraph
-            XElement xamlParagraph = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Paragraph)); // changed
+            XElement xamlParagraph = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Paragraph,_xamlNamespace));
             XNode lastNodeProcessed = null;
             while (htmlNode != null)
             {
@@ -641,7 +640,7 @@ using System.Windows;
                 Dictionary<Object,Object> currentProperties = GetElementProperties(htmlElement, inheritedProperties, out localProperties, stylesheet, sourceContext);
 
                 // Create a XAML element corresponding to this html element
-                XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Hyperlink)); //  changed
+                XElement xamlElement = new XElement(XName.Get( /*localName:*/HtmlToXamlConverter.Xaml_Hyperlink,_xamlNamespace));
                 ApplyLocalProperties(xamlElement, localProperties, /*isBlock:*/false);
 
                 string[] hrefParts = href.Split(new char[] { '#' });
@@ -704,7 +703,7 @@ using System.Windows;
                 }
                 else
                 {
-                    xamlFlowDocumentElement = new XElement(XName.Get(/*localName:*/HtmlToXamlConverter.Xaml_Span)); //changed
+                    xamlFlowDocumentElement = new XElement(XName.Get(/*localName:*/HtmlToXamlConverter.Xaml_Span,_xamlNamespace));
                     while (InlineFragmentParentElement.FirstNode != null)
                     {
                         XNode copyNode = InlineFragmentParentElement.FirstNode;
@@ -725,7 +724,7 @@ using System.Windows;
 
         private static void AddOrphanImage(XElement xamlParentElement, XElement htmlElement, Dictionary<Object, Object> inheritedProperties, CssStylesheet stylesheet, List<XElement> sourceContext)
         {
-            XElement xamlListElement = new XElement(XName.Get(Xaml_Paragraph/*Xaml_List*/)); //changed
+            XElement xamlListElement = new XElement(XName.Get(Xaml_Paragraph/*Xaml_List*/,_xamlNamespace));
             AddImage(xamlListElement, htmlElement, inheritedProperties, stylesheet, sourceContext);
             xamlParentElement.Add(xamlListElement);
         }
@@ -739,7 +738,7 @@ using System.Windows;
             Dictionary<Object, Object> currentProperties = GetElementProperties(htmlElement, inheritedProperties, out localProperties, stylesheet, sourceContext);
 
             // Create a XAML element corresponding to this html element
-            XElement xamlElement = new XElement(XName.Get( /*localName:*/Xaml_InlineUIContainer)); // changed
+            XElement xamlElement = new XElement(XName.Get( /*localName:*/Xaml_InlineUIContainer,_xamlNamespace));
             //ApplyLocalProperties(xamlElement, localProperties, /*isBlock:*/false);
             XElement xamlButtonElement = new XElement(XName.Get("Button",_xamlNamespace));
             XElement xamlImageElement = new XElement(XName.Get(Xaml_Image, _xamlNamespace));
@@ -784,7 +783,6 @@ using System.Windows;
             Dictionary<Object,Object> currentProperties = GetElementProperties(htmlListElement, inheritedProperties, out localProperties, stylesheet, sourceContext);
 
             // Create Xaml List element
-            //XElement xamlListElement = new XElement(XName.Get(Xaml_List, _xamlNamespace));
             XElement xamlListElement = new XElement(XName.Get(Xaml_Paragraph, _xamlNamespace));
 
 
@@ -2730,8 +2728,7 @@ using System.Windows;
 
         #region Private Fields
 
-        //public static string _xamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
-        public static string _xamlNamespace = "";
+        public static string _xamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
 
         #endregion Private Fields
     }
