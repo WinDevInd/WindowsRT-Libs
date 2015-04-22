@@ -9,8 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <Grid x:Name="LayoutRoot" Height="700" Width="400">
-       <Controls:JFlipView x:Name="flipvw" VerticalAlignment="Top" HorizontalAlignment="Stretch" IncrementalLoadingTrigger="Edge" 
+    <StackPanel x:Name="LayoutRoot" Height="700" Width="400">
+       <Controls:JFlipView x:Name="flipvw" VerticalAlignment="Top" Height="300" HorizontalAlignment="Stretch" IncrementalLoadingTrigger="Edge" 
 			DataFetchSize="2" ItemsSource="{Binding Images}" IsSlideShowPlaying="True"
 			IncrementalLoadingThreshold="1"  Margin="0,0,0,0" Background="#FF444747" ManipulationMode="All">
             <Controls:JFlipView.ItemTemplate>
@@ -20,13 +20,11 @@
             </Controls:JFlipView.ItemTemplate>
         </Controls:JFlipView>
 
-        <!--Controls:JFlipViewIndicator x:Name="FlipViewInd" IsSlideShowPlaying="true"  
-			VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,0,10,50" SlideShowTimeSpan="0:0:5">
+        <Controls:JFlipViewIndicator x:Name="flpind" FlipViewElement="{Binding ElementName=flipvw}" 
+                                     ItemsSourceProvider="ManualProvider">
             <Controls:JFlipViewIndicator.SelectedItemTemplate>
                 <DataTemplate>
-
-                    --><!--Ellipse Stroke="{Binding Color}" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>--><!--
-
+                   
                     <Border BorderThickness="1" BorderBrush="#f1f1f1" Margin="5,0">
                         <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="50" />
                     </Border>
@@ -35,15 +33,35 @@
             <Controls:JFlipViewIndicator.UnSelectedItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="0" BorderBrush="Transparent" Margin="5,1">
-
-                        --><!--<Ellipse Stroke="White" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>--><!--
-
                         <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="50"/>
                     </Border>
                 </DataTemplate>
             </Controls:JFlipViewIndicator.UnSelectedItemTemplate>
         </Controls:JFlipViewIndicator>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Tapped="Back_Tapped"/>-->
+        
+        <!--<Controls:JFlipViewIndicator x:Name="FlipViewInd" FlipViewElement="{Binding ElementName=flipvw}"
+                                       ItemsSourceProvider="PaginationProvider"
+			VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,10">
+            <Controls:JFlipViewIndicator.SelectedItemTemplate>
+                <DataTemplate>
+                    --><!--Ellipse Stroke="{Binding Color}" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" StrokeDashCap="Round"
+                    StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>--><!--
+                    <Border BorderThickness="1" BorderBrush="#f1f1f1" Margin="5,0">
+                        <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="50" />
+                    </Border>
+                </DataTemplate>
+            </Controls:JFlipViewIndicator.SelectedItemTemplate>
+            <Controls:JFlipViewIndicator.UnSelectedItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" BorderBrush="Transparent" Margin="5,1">
+                        --><!--<Ellipse Stroke="White" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" 
+                        StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>--><!--
+                        <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="50"/>
+                    </Border>
+                </DataTemplate>
+            </Controls:JFlipViewIndicator.UnSelectedItemTemplate>
+        </Controls:JFlipViewIndicator>-->
+<!--<Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Tapped="Back_Tapped"/>-->
       
         <!--<Controls:WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Controls:Rating RatingItemCount="2" Value="1.6" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="40" Width="80"/>
@@ -55,5 +73,5 @@
         </Controls:WrapPanel>-->
         <!--<Controls:HTMLViewer x:Name="HTMLTextbox" FontSize="30" Foreground="Red" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                              HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>-->
-    </Grid>
+    </StackPanel>
 </Page>

@@ -24,17 +24,18 @@ namespace JISoft.Controls
     using Windows.UI.Xaml.Media;
     using Windows.UI.Xaml.Navigation;
 
-    public sealed partial class JFlipViewIndicator : UserControl, IDisposable
+    public enum ItemsSourceProvider
     {
-        private DispatcherTimer timer;
-        private bool shouldResumeSlideShow;
-        private bool isSlideShowPlayingInitid = false;
+        PaginationProvider,
+        ManualProvider
+    }
 
+    public sealed partial class JFlipViewIndicator : UserControl
+    {
         public JFlipViewIndicator()
         {
             this.InitializeComponent();
             this.ListViewIndicator.DataContext = this;
-            this.Initialize();
         }
 
         ~JFlipViewIndicator()
@@ -52,25 +53,30 @@ namespace JISoft.Controls
         }
 
         /// <summary>
-        /// Initialize default values and new refrences for properties
-        /// </summary>
-        private void Initialize()
-        {
-            // this.IndicatorSelector = new IndicatorSelector();
-            this.timer = new DispatcherTimer();
-            timer.Tick += timer_Tick;
-            this.SlideShowTimeSpan = TimeSpan.FromSeconds(30.00);
-            this.shouldResumeSlideShow = false;
-            this.isSlideShowPlayingInitid = true;
-        }
-
-        /// <summary>
         /// Gets the JISoft.Flipview's Instance which is passed in PaginationProvider
         /// </summary>
-        public JFlipView IndicatorProvider
+        public object IndicatorProvider
         {
             get;
             private set;
+        }
+
+        private ItemsSourceProvider _ItmesSourceProvider;
+        public ItemsSourceProvider ItemsSourceProvider
+        {
+            get
+            {
+                return _ItmesSourceProvider;
+            }
+            set
+            {
+                if (value != _ItmesSourceProvider)
+                {
+                    _ItmesSourceProvider = value;
+                    OnItemSourceProviderChanged(value);
+                }
+            }
+
         }
 
         #region Dependency and Public Property
@@ -103,15 +109,6 @@ namespace JISoft.Controls
         }
 
         /// <summary>
-        /// Gets or set JISoft.FlipView.JFlipView as a Provider for Itemsource and other things to handle complete working        
-        /// </summary>
-        public object PaginationProvider
-        {
-            get { return (object)GetValue(PaginationProviderProperty); }
-            set { SetValue(PaginationProviderProperty, value); }
-        }
-
-        /// <summary>
         /// Gets or set yhe IndicatorList background
         /// </summary>
         public Brush IndicatorBackground
@@ -132,7 +129,7 @@ namespace JISoft.Controls
         /// <summary>
         /// Indicator control's Itemsource for list of slides/bullets
         /// </summary>
-        public object IndicatorSource
+        public object IndicatorItemsSource
         {
             get { return (object)GetValue(IndicatorSourceProperty); }
             set { SetValue(IndicatorSourceProperty, value); }
@@ -142,22 +139,6 @@ namespace JISoft.Controls
         #endregion
 
         #region Public Property
-
-        private bool _IsSlideShowPlaying;
-        /// <summary>
-        /// Gets or set the SlideshowPlaying true/false to control automatic-slideshow
-        /// </summary>
-        public bool IsSlideShowPlaying
-        {
-            get
-            {
-                return (_IsSlideShowPlaying || isSlideShowPlayingInitid);
-            }
-            set
-            {
-                OnSlideShowPlayingChanged(value);
-            }
-        }
 
         /// <summary>
         /// Gets or set the SelectedItemTemplate - Used as selected item's data template
@@ -177,24 +158,6 @@ namespace JISoft.Controls
             set;
         }
 
-        /// <summary>
-        /// Gets or set the Slideshow play duration
-        /// </summary>
-        public TimeSpan SlideShowTimeSpan
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        ///  Gets the Status of Slideshow running
-        /// </summary>
-        public bool IsSlideShowRunning
-        {
-            get;
-            private set;
-        }
-
         #endregion
 
         #region DependencyProperty Declaration
@@ -211,10 +174,6 @@ namespace JISoft.Controls
             DependencyProperty.Register("IndicatorPadding", typeof(Thickness), typeof(JFlipViewIndicator),
             new PropertyMetadata(new Thickness(0)));
 
-        public static readonly DependencyProperty PaginationProviderProperty =
-            DependencyProperty.Register("PaginationProvider", typeof(object), typeof(JFlipViewIndicator),
-            new PropertyMetadata(null, OnIndicatorProviderChanged));
-
         public static readonly DependencyProperty IndicatorBackgroundProperty =
            DependencyProperty.Register("IndicatorBackground", typeof(Brush), typeof(JFlipViewIndicator),
            new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
@@ -224,164 +183,74 @@ namespace JISoft.Controls
             new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
 
         public static readonly DependencyProperty IndicatorSourceProperty =
-           DependencyProperty.Register("IndicatorSource", typeof(object), typeof(JFlipViewIndicator),
-           new PropertyMetadata(null, IndicatorItemSourceChanged));
+           DependencyProperty.Register("IndicatorItemsSource", typeof(object), typeof(JFlipViewIndicator),
+           new PropertyMetadata(null,onPropertyChanged));
 
 
+
+        public object FlipViewElement
+        {
+            get { return (object)GetValue(FlipViewElementProperty); }
+            set { SetValue(FlipViewElementProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Flip.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FlipViewElementProperty =
+            DependencyProperty.Register("FlipViewElement", typeof(object), typeof(JFlipViewIndicator), new PropertyMetadata(null, onPropertyChanged));
+
+        private static void onPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            JFlipViewIndicator indicator = d as JFlipViewIndicator;
+            if (indicator != null)
+            {
+                if (indicator.FlipViewElement != null)
+                {
+                    indicator.SubscribeToFlipViewEvents();
+                }
+            }
+        }
         #endregion
 
-        #region PropertyChange Call backs
 
-        /// <summary>
-        /// Callback For Indicator listview item source changed
-        /// </summary>
-        private static void IndicatorItemSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private void OnItemSourceProviderChanged(ItemsSourceProvider provider)
         {
-            JFlipViewIndicator indicatorControl = d as JFlipViewIndicator;
-            if (indicatorControl != null)
-            {
+            this.ListViewIndicator.ClearValue(ListView.ItemsSourceProperty);
+            Binding itemsSourceBinding = new Binding();
 
-                if (e.NewValue != null && indicatorControl.IsSlideShowPlaying)
-                {
-                    indicatorControl.IsSlideShowPlaying = true;
-                }
-            }
-        }
-
-        /// <summary> 
-        ///     Call back -  when PagnationProvider changed
-        /// <summary> 
-        private static void OnIndicatorProviderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            JFlipViewIndicator indicatorControl = d as JFlipViewIndicator;
-            if (indicatorControl != null)
+            if (provider == ItemsSourceProvider.PaginationProvider)
             {
-                if (indicatorControl.IndicatorProvider == null)
+                if (this.FlipViewElement != null)
                 {
-                    JFlipView flipView = e.NewValue as JFlipView;
-                    indicatorControl.SubscribeToFlipViewEvents(ref flipView);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Slideshow playing property changed callback
-        /// </summary>
-        /// <param name="value">true or false - IsSlideshowRunning</param>
-        private void OnSlideShowPlayingChanged(bool value)
-        {
-            _IsSlideShowPlaying = value;
-            if (value)
-            {
-                if (this.IndicatorSource != null)
-                {
-                    this.Play();
+                    itemsSourceBinding.Path = new PropertyPath("ItemsSource");
+                    itemsSourceBinding.ElementName = "PaginationProvider";
+                    itemsSourceBinding.Source = FlipViewElement;
                 }
             }
             else
             {
-                this.Stop();
+                itemsSourceBinding.Path = new PropertyPath("IndicatorItemsSource");
+                itemsSourceBinding.Source = this;
             }
+
+            ListViewIndicator.SetBinding(ListView.ItemsSourceProperty, itemsSourceBinding);
+
         }
 
-        #endregion
-
-        #region PageinationProvider Flipview related code
-
-        private void SubscribeToFlipViewEvents(ref JFlipView flipView)
+        private void SubscribeToFlipViewEvents()
         {
-            if (flipView == null)
+            if (FlipViewElement == null)
             {
                 throw new ArgumentException("Invalid Refrence passed in PaginatinProvider - It must be JISoft.Flipview Element");
             }
-            IndicatorProvider = flipView;
-            Binding selectedIndexBinding = new Binding();
-            selectedIndexBinding.Path = new PropertyPath("SelectedIndex");
-            selectedIndexBinding.ElementName = "IndicatorProvider";
-            selectedIndexBinding.Mode = BindingMode.TwoWay;
-            selectedIndexBinding.Source = IndicatorProvider;
-            ListViewIndicator.SetBinding(ListView.SelectedIndexProperty, selectedIndexBinding);
-        }
-
-        #endregion
-
-        #region private Methods and Incontrol events
-
-        private void IndicatorControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (this.IndicatorProvider != null)
+            if (this.ListViewIndicator.Items != null && this.ListViewIndicator.Items.Count > 0)
             {
-                if (shouldResumeSlideShow)
-                {
-                    this.IsSlideShowPlaying = true;
-                }
+                Binding selectedIndexBinding = new Binding();
+                selectedIndexBinding.Path = new PropertyPath("SelectedIndex");
+                selectedIndexBinding.ElementName = "PaginationProvider";
+                selectedIndexBinding.Mode = BindingMode.TwoWay;
+                selectedIndexBinding.Source = FlipViewElement;
+                ListViewIndicator.SetBinding(ListView.SelectedIndexProperty, selectedIndexBinding);
             }
-        }
-
-        private void IndicatorControl_Unloaded(object sender, RoutedEventArgs e)
-        {
-            this.Stop();
-            shouldResumeSlideShow = true;
-        }
-        #endregion
-
-        #region SlideShow methods
-
-        /// <summary>
-        ///  Start the slideshow
-        ///     Slideshow interval will be referd from SlideShowTimeSpan property
-        ///     Default value of SlideShowTimeSpan is 30 seconds
-        /// </summary>
-        private void Play()
-        {
-            if (IsSlideShowRunning)
-            {
-                return;
-            }
-            timer.Interval = this.SlideShowTimeSpan;
-            IsSlideShowRunning = true;
-            timer.Start();
-        }
-
-        /// <summary>
-        ///  Pause the slideshow
-        ///  This method will remove the timer for slideshow
-        /// </summary>
-        private void Stop()
-        {
-            timer.Stop();
-            IsSlideShowRunning = false;
-        }
-
-        private void timer_Tick(object sender, object e)
-        {
-            if (this.IndicatorProvider != null && this.IndicatorProvider.Items != null && this.IndicatorProvider.Items.Count > 1)
-            {
-                if (this.IndicatorProvider.SelectedIndex == this.IndicatorProvider.Items.Count - 1)
-                {
-                    IndicatorProvider.SelectedIndex = 0;
-                    return;
-                }
-                IndicatorProvider.SelectedIndex += 1;
-            }
-        }
-        #endregion
-
-        /// <summary>
-        /// Clear all the resources here - better for Avaoid memory leaks
-        /// As we are using the JISoft.FlipView.JFlipView refrence.
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        private void Dispose(bool removeAll = false)
-        {
-            shouldResumeSlideShow = false;
-            IsSlideShowRunning = false;
-            timer.Tick -= timer_Tick;
-            timer.Stop();
         }
 
         private void ListViewIndicator_SelectionChanged(object sender, SelectionChangedEventArgs e)

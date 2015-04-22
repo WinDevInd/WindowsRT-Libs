@@ -45,10 +45,16 @@ namespace TestAppWP
             get;
             set;
         }
+        public ObservableCollection<ImageModel> Images1
+        {
+            get;
+            set;
+        }
 
         public MainPage()
         {
-           
+
+            Images1 = new ObservableCollection<ImageModel>();
             Images = new ObservableCollection<ImageModel>();
             this.DataContext = this;
             InitializeComponent();
@@ -58,6 +64,7 @@ namespace TestAppWP
             }
 
             this.flipvw.SlideShowTimeSpan = TimeSpan.FromSeconds(3);
+            this.flpind.IndicatorItemsSource = Images;
             //this.flipvw.ItemsSource = Images;
 
             //this.FlipViewInd.PaginationProvider = flipvw;

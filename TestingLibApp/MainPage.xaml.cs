@@ -43,15 +43,15 @@ namespace TestingLibApp
             this.DataContext = this;
             this.InitializeComponent();
             Images = new List<ImageModel>();
-            this.FlipViewInd.PaginationProvider = flipvw;
-            this.FlipViewInd.IndicatorSource = Images;
-            this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
+            //this.FlipViewInd.PaginationProvider = flipvw;
+            //this.FlipViewInd.IndicatorSource = Images;
+            //this.FlipViewInd.SlideShowTimeSpan = TimeSpan.FromSeconds(5);
             for (int i = 2; i <= 9; i++)
             {
                 Images.Add(new ImageModel() { ImagePath = "/Assets/WinLogos/" + i + ".jpg" });
             }
-            this.FlipViewInd.IndicatorSource = null;
-            this.FlipViewInd.IndicatorSource = Images;
+            //this.FlipViewInd.IndicatorSource = null;
+            //this.FlipViewInd.IndicatorSource = Images;
             
         }
 

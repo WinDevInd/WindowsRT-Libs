@@ -8,9 +8,7 @@
     mc:Ignorable="d"
     xmlns:Converter="using:JISoft.Converters"
     x:Name="IndicatorControl"
-    d:DesignHeight="200" d:DesignWidth="480"    
-    Loaded="IndicatorControl_Loaded"
-    Unloaded="IndicatorControl_Unloaded">
+    d:DesignHeight="200" d:DesignWidth="480">
 
     <UserControl.Resources>
         <Converter:BooleanToVisibilityConverter x:Name="BooleanToVisibilityConverter"/>
