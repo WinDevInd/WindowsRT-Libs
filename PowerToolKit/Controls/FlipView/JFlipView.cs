@@ -18,6 +18,9 @@ namespace JISoft.Controls
     public class JFlipView : Windows.UI.Xaml.Controls.FlipView
     {
         public event EventHandler onItemPropertyChanged;
+        private DispatcherTimer timer;
+        private bool shouldResumeSlideShow;
+        private bool isSlideShowPlayingInitid = false;
 
         /// <summary>
         /// Represents a control that enables a user to select an item from a collection of items.
@@ -31,6 +34,13 @@ namespace JISoft.Controls
             this.DataFetchSize = 3;
             this.IncrementalLoadingThreshold = 1;
             IsBusy = false;
+            this.Loaded += JFlipView_Loaded;
+            this.Unloaded += JFlipView_Unloaded;
+
+            this.timer = new DispatcherTimer();
+            timer.Tick += timer_Tick;
+            this.SlideShowTimeSpan = TimeSpan.FromSeconds(30.00);
+            this.shouldResumeSlideShow = false;
         }
 
         ~JFlipView()
@@ -44,6 +54,8 @@ namespace JISoft.Controls
             if (this.Items.Count == 0)
             {
                 this.LoadNextItemAsync(false);
+                this.IsSlideShowPlaying = shouldResumeSlideShow;
+
             }
 
             if (this.onItemPropertyChanged != null)
@@ -51,6 +63,43 @@ namespace JISoft.Controls
                 this.onItemPropertyChanged(this, EventArgs.Empty);
             }
         }
+
+
+
+        private TimeSpan _SlideShowTimeSpan;
+        /// <summary>
+        /// Gets or set the Slideshow play duration
+        /// </summary>
+        public TimeSpan SlideShowTimeSpan
+        {
+            get
+            {
+                return _SlideShowTimeSpan;
+            }
+            set
+            {
+                _SlideShowTimeSpan = value;
+                timer.Interval = value;
+            }
+        }
+
+        private bool _IsSlideShowPlaying;
+        /// <summary>
+        /// Gets or set the SlideshowPlaying true/false to control automatic-slideshow
+        /// </summary>
+        public bool IsSlideShowPlaying
+        {
+            get
+            {
+                return (_IsSlideShowPlaying || isSlideShowPlayingInitid);
+            }
+            set
+            {
+                OnSlideShowPlayingChanged(value);
+            }
+        }
+
+
 
         /// <summary>
         /// Gets or set if Flipview is busy in adding more item to item source
@@ -179,11 +228,90 @@ namespace JISoft.Controls
             return false;
         }
 
+        /// <summary>
+        /// Slideshow playing property changed callback
+        /// </summary>
+        /// <param name="value">true or false - IsSlideshowRunning</param>
+        private void OnSlideShowPlayingChanged(bool value)
+        {
+            _IsSlideShowPlaying = value;
+            if (value)
+            {
+                if (this.Items != null)
+                {
+                    this.Play();
+                }
+            }
+            else
+            {
+                this.Stop();
+            }
+        }
+
+        /// <summary>
+        ///  Start the slideshow
+        ///     Slideshow interval will be referd from SlideShowTimeSpan property
+        ///     Default value of SlideShowTimeSpan is 30 seconds
+        /// </summary>
+        private void Play()
+        {
+            if (isSlideShowPlayingInitid)
+            {
+                return;
+            }
+            timer.Interval = this.SlideShowTimeSpan;
+            timer.Start();
+            isSlideShowPlayingInitid = true;
+        }
+
+        /// <summary>
+        ///  Pause the slideshow
+        ///  This method will remove the timer for slideshow
+        /// </summary>
+        private void Stop()
+        {
+            timer.Stop();
+        }
+
+        private void timer_Tick(object sender, object e)
+        {
+            if (this.Items != null && Items.Count > 1)
+            {
+                if (this.SelectedIndex == this.Items.Count - 1)
+                {
+                    this.SelectedIndex = 0;
+                }
+                else
+                {
+                    this.SelectedIndex += 1;
+                }
+            }
+        }
+
+        void JFlipView_Unloaded(object sender, RoutedEventArgs e)
+        {
+            shouldResumeSlideShow = IsSlideShowPlaying;
+            isSlideShowPlayingInitid = false;
+            timer.Stop();
+        }
+
+        void JFlipView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(!shouldResumeSlideShow)
+            {
+                return;
+            }
+            isSlideShowPlayingInitid = shouldResumeSlideShow;
+            IsSlideShowPlaying = shouldResumeSlideShow;
+        }
+
         public void Dispose()
         {
             try
             {
                 this.SelectionChanged -= JFlipView_SelectionChanged;
+                this.Loaded -= JFlipView_Loaded;
+                this.Unloaded -= JFlipView_Unloaded;
             }
             catch (Exception e)
             {
