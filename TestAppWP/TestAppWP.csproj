@@ -126,30 +126,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="IncrementalLoadingCollections">
-      <HintPath>..\packages\JISoft.Collections.1.1.0.1\lib\wpa81\IncrementalLoadingCollections.dll</HintPath>
-    </Reference>
-    <Reference Include="JFlipView, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JISoft.FlipView.1.2.2\lib\portable-wpa81+win81\JFlipView.dll</HintPath>
+    <Reference Include="PowerToolKit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JISoft.Toolkit.0.0.8\lib\portable-wpa81+win81\PowerToolKit.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="JFlipViewIndicator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JISoft.FlipViewIndicator.1.0.0.3\lib\portable-wpa81+win81\JFlipViewIndicator.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="JRatingControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\JISoft.Rating.1.0.3\lib\portable-wpa81+win81\JRatingControl.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PowerToolKit\PowerToolKit.csproj">
-      <Project>{8ef3d159-b080-4868-ae8f-b9cc8a63682e}</Project>
-      <Name>PowerToolKit</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
