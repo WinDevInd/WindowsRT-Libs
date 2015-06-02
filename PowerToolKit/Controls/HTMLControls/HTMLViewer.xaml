@@ -6,8 +6,6 @@
     mc:Ignorable="d"
     d:DesignHeight="480" d:DesignWidth="480">
 
-    <ScrollViewer x:Name="Scroll">
-        <StackPanel x:Name="LayoutRoot">
-        </StackPanel>
-    </ScrollViewer>
+    <Grid x:Name="Scroll">
+    </Grid>
 </UserControl>

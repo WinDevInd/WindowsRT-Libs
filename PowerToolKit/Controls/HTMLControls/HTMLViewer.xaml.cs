@@ -26,20 +26,21 @@ namespace JISoft.Controls
         public HTMLViewer()
         {
             InitializeComponent();
-            var hor = new Binding();
-            hor.Path = new PropertyPath("HorizontalScrollBarVisibility");
-            hor.Mode = BindingMode.TwoWay;
-            hor.Source = Scroll;
-            SetBinding(HorizontalScrollBarVisibilityProperty, hor);
-            var ver = new Binding();
-            ver.Path = new PropertyPath("VerticalScrollBarVisibility");
-            ver.Mode = BindingMode.TwoWay;
-            ver.Source = Scroll;
-            SetBinding(VerticalScrollBarVisibilityProperty, ver);
+            //var hor = new Binding();
+            //hor.Path = new PropertyPath("HorizontalScrollBarVisibility");
+            //hor.Mode = BindingMode.TwoWay;
+            //hor.Source = Scroll;
+            //SetBinding(HorizontalScrollBarVisibilityProperty, hor);
+            //var ver = new Binding();
+            //ver.Path = new PropertyPath("VerticalScrollBarVisibility");
+            //ver.Mode = BindingMode.TwoWay;
+            //ver.Source = Scroll;
+            //SetBinding(VerticalScrollBarVisibilityProperty, ver);
         }
 
         public static readonly DependencyProperty VerticalScrollBarVisibilityProperty = ScrollViewer.VerticalScrollBarVisibilityProperty;
         public static readonly DependencyProperty HorizontalScrollBarVisibilityProperty = ScrollViewer.HorizontalScrollBarVisibilityProperty;
+
 
 
         [System.ComponentModel.DefaultValue("")]
@@ -91,16 +92,16 @@ namespace JISoft.Controls
                          {
                              try
                              {
-                                 
+
                                  String s = "<RichTextBlock xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">\n" + xamlXml
                                      + "</RichTextBlock>\n";
 
                                  //var section = XamlReader.Load(xamlXml.ToString()) as Windows.UI.Xaml.Documents.BlockCollection;
                                  RichTextBlock rtb = XamlReader.Load(s) as RichTextBlock;
-                                 rtb.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
-                                 rtb.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
-                                 LayoutRoot.Children.Clear();
-                                 Scroll.ChangeView(0, 0, 1);
+                                 rtb.HorizontalAlignment = this.HorizontalContentAlignment;
+                                 rtb.VerticalAlignment = this.VerticalContentAlignment;
+                                 Scroll.Children.Clear();
+                                 //Scroll.ChangeView(0, 0, 1);
                                  Binding b = new Binding();
                                  b.Path = new PropertyPath("FontSize");
                                  b.Source = this;
@@ -109,7 +110,7 @@ namespace JISoft.Controls
                                  b.Path = new PropertyPath("Foreground");
                                  b.Source = this;
                                  rtb.SetBinding(RichTextBlock.ForegroundProperty, b);
-                                 LayoutRoot.Children.Add(rtb);
+                                 Scroll.Children.Add(rtb);
                                  if (rtb.Blocks != null)
                                  {
                                      foreach (var block in rtb.Blocks)
