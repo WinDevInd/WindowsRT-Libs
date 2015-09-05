@@ -25,11 +25,18 @@ namespace TestingLibApp
         public BlankPage1()
         {
             this.InitializeComponent();
+            this.Loaded += BlankPage1_Loaded;
         }
 
-        private void Button_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BlankPage1_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage));
+            String s = "<dl>\n <dt>Coffee</dt>\n <dd>- black hot drink</dd>\n <dt>Milk</dt>\n <dd>- white cold drink</dd>\n</dl>\n";
+            this.HtmlView.Html = s;
+        }
+
+        private void RichTextBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }

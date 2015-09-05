@@ -183,10 +183,11 @@ namespace JISoft.Controls
                 {
                     // h.CommandParameter = h.NavigateUri;
 
-                    if (h.Foreground.GetType() == typeof(SolidColorBrush) && ((SolidColorBrush)h.Foreground).Color == Colors.Transparent)
+                    if (h.Foreground.GetType() == typeof(SolidColorBrush))
                     {
                         h.Foreground = this.Foreground;
                     }
+                    h.Foreground = new SolidColorBrush(Colors.Blue);
                     h.Click += hyperlink_Click;
                     postParseInlinesSettings(h.Inlines);
                     continue;

@@ -818,6 +818,7 @@ using System.Windows;
                     AddListItem(xamlListElement, (XElement)htmlChildNode, currentProperties, stylesheet, sourceContext, isOrdered? count : -1);
                     Debug.Assert(sourceContext.Count > 0 && sourceContext[sourceContext.Count - 1] == htmlChildNode);
                     sourceContext.RemoveAt(sourceContext.Count - 1);
+                    count++;
                 }
                 else
                 {
@@ -825,7 +826,7 @@ using System.Windows;
                     //  We need to append the content to the end
                     // of a previous list item.
                 }
-                count++;
+                //count++;
             }
 
             // Add the List element to xaml tree - if it is not empty
