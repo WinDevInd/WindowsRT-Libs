@@ -82,6 +82,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BlankPage1.xaml.cs">
+      <DependentUpon>BlankPage1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -113,24 +116,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="BlankPage1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FlipViewIndicator">
-      <HintPath>..\packages\JISoft.FlipViewIndicator.1.0.0.1\lib\wpa81\FlipViewIndicator.dll</HintPath>
-    </Reference>
-    <Reference Include="IncrementalLoadingCollections">
-      <HintPath>..\packages\JISoft.Collections.1.1.0.1\lib\wpa81\IncrementalLoadingCollections.dll</HintPath>
-    </Reference>
-    <Reference Include="JFlipView">
-      <HintPath>..\packages\JISoft.FlipView.1.2.0.0\lib\wpa81\JFlipView.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\PowerToolKit\PowerToolKit.csproj">
+      <Project>{8ef3d159-b080-4868-ae8f-b9cc8a63682e}</Project>
+      <Name>PowerToolKit</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,26 +20,18 @@ namespace TestingLibApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class BlankPage1 : Page
     {
-        public class ImageModel
+        public BlankPage1()
         {
-            public string ImagePath
-            {
-                get;
-                set;
-            }
+            this.InitializeComponent();
+            this.Loaded += BlankPage1_Loaded;
         }
 
-        public List<ImageModel> Images
+        private void BlankPage1_Loaded(object sender, RoutedEventArgs e)
         {
-            get;
-            set;
-        }
-
-        public MainPage()
-        {
-            this.InitializeComponent();   
+            String s = "<dl>\n <dt>Coffee</dt>\n <dd>- black hot drink</dd>\n <dt>Milk</dt>\n <dd>- white cold drink</dd>\n</dl>\n";
+            this.HtmlView.Html = s;
         }
 
         private void RichTextBlock_Tapped(object sender, TappedRoutedEventArgs e)

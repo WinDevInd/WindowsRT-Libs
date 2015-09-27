@@ -5,37 +5,15 @@
     xmlns:local="using:TestingLibApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:tools="using:JISoft.FlipView"
-    xmlns:toolkit="using:JISoft.Pagination"
+    xmlns:tools="using:JISoft.Controls"
+    xmlns:toolkit="using:JISoft.HTMLTools"
     mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot">
-        <tools:JFlipView x:Name="flipvw" VerticalAlignment="Top" HorizontalAlignment="Stretch" IncrementalLoadingTrigger="Edge" 
-                           DataFetchSize="2" ItemsSource="{Binding Images}"
-                         IncrementalLoadingThreshold="1"  Margin="0,0,0,0" Background="#FF444747" ManipulationMode="All">
-            <tools:JFlipView.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding ImagePath}" Stretch="None"/>
-                </DataTemplate>
-            </tools:JFlipView.ItemTemplate>
-        </tools:JFlipView>
-
-        <toolkit:FlipViewIndicator x:Name="FlipViewInd" IndicatorSource="{Binding Images}" PaginationProvider="{Binding ElementName=flipvw}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,50">
-            <toolkit:FlipViewIndicator.SelectedItemTemplate>
-                <DataTemplate>
-                    <!--Ellipse Stroke="{Binding Color}" StrokeThickness="1"  Fill="#f1f1f1" Height="10" Width="10" StrokeDashCap="Round" StrokeEndLineCap="Square" StrokeStartLineCap="Round"/>-->
-                    <Border BorderThickness="1" BorderBrush="#f1f1f1">
-                        <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="30"/>
-                    </Border>
-                </DataTemplate>
-            </toolkit:FlipViewIndicator.SelectedItemTemplate>
-            <toolkit:FlipViewIndicator.UnSelectedItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="5" Margin="1" BorderBrush="Transparent">
-                        <Image Source="{Binding ImagePath}" Stretch="Uniform" Height="30"/>
-                    </Border>
-                </DataTemplate>
-            </toolkit:FlipViewIndicator.UnSelectedItemTemplate>
-        </toolkit:FlipViewIndicator>
+        <RichTextBlock Tapped="RichTextBlock_Tapped" HorizontalAlignment="Stretch">
+            <Paragraph>
+                <Run Text="Jay K Daftary"/>
+            </Paragraph>
+        </RichTextBlock>
     </Grid>
 </Page>
