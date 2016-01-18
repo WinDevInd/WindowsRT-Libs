@@ -184,19 +184,19 @@ namespace JISoft.Controls
 
         public static readonly DependencyProperty IndicatorSourceProperty =
            DependencyProperty.Register("IndicatorItemsSource", typeof(object), typeof(JFlipViewIndicator),
-           new PropertyMetadata(null,onPropertyChanged));
+           new PropertyMetadata(null, onPropertyChanged));
 
 
 
-        public object FlipViewElement
+        public FlipView FlipViewElement
         {
-            get { return (object)GetValue(FlipViewElementProperty); }
+            get { return (FlipView)GetValue(FlipViewElementProperty); }
             set { SetValue(FlipViewElementProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Flip.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FlipViewElementProperty =
-            DependencyProperty.Register("FlipViewElement", typeof(object), typeof(JFlipViewIndicator), new PropertyMetadata(null, onPropertyChanged));
+            DependencyProperty.Register("FlipViewElement", typeof(FlipView), typeof(JFlipViewIndicator), new PropertyMetadata(null, onPropertyChanged));
 
         private static void onPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -222,8 +222,7 @@ namespace JISoft.Controls
                 if (this.FlipViewElement != null)
                 {
                     itemsSourceBinding.Path = new PropertyPath("ItemsSource");
-                    itemsSourceBinding.ElementName = "PaginationProvider";
-                    itemsSourceBinding.Source = FlipViewElement;
+                    itemsSourceBinding.ElementName = FlipViewElement.Name;
                 }
             }
             else
@@ -240,15 +239,14 @@ namespace JISoft.Controls
         {
             if (FlipViewElement == null)
             {
-                throw new ArgumentException("Invalid Refrence passed in PaginatinProvider - It must be JISoft.Flipview Element");
+                throw new ArgumentException("Invalid Refrence passed in PaginatinProvider - It must be Flipview Element");
             }
             if (this.ListViewIndicator.Items != null && this.ListViewIndicator.Items.Count > 0)
             {
                 Binding selectedIndexBinding = new Binding();
                 selectedIndexBinding.Path = new PropertyPath("SelectedIndex");
-                selectedIndexBinding.ElementName = "PaginationProvider";
                 selectedIndexBinding.Mode = BindingMode.TwoWay;
-                selectedIndexBinding.Source = FlipViewElement;
+                selectedIndexBinding.ElementName = FlipViewElement.Name;
                 ListViewIndicator.SetBinding(ListView.SelectedIndexProperty, selectedIndexBinding);
             }
         }
