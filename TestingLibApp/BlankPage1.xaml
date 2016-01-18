@@ -1,14 +1,15 @@
 ﻿<Page
-    x:Class="TestingLibApp.BlankPage1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestingLibApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:JISoft.Controls"
+    x:Class="TestingLibApp.BlankPage1"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Tapped="Button_Tapped"/>
 
+        <Controls:HTMLViewer  x:Name="HtmlView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Page>
