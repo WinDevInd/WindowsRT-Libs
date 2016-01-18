@@ -220,7 +220,7 @@ namespace JISoft.Controls
         //      Identifies when to trigger IncrementalLoading
         private bool CanIncrementalLoadigTrigger()
         {
-            if (!IsBusy && IncrementalLoadingTrigger == IncrementalLoadingTrigger.Edge
+            if (!IsBusy && this.Items != null && IncrementalLoadingTrigger == IncrementalLoadingTrigger.Edge
                 && (this.Items.Count - this.SelectedIndex) <= (DataFetchSize * IncrementalLoadingThreshold))
             {
                 return true;
@@ -297,7 +297,7 @@ namespace JISoft.Controls
 
         void JFlipView_Loaded(object sender, RoutedEventArgs e)
         {
-            if(!shouldResumeSlideShow)
+            if (!shouldResumeSlideShow)
             {
                 return;
             }
