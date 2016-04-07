@@ -8,8 +8,25 @@
     x:Class="TestingLibApp.BlankPage1"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer>
+        <Grid Margin="16,0" Background="#717171">
 
-        <Controls:HTMLViewer  x:Name="HtmlView" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+            <Controls:HTMLViewer  FontSize="16" MaxLines="20" TextTrimming="CharacterEllipsis" FontFamily="Segoe UI"
+            x:Name="HtmlView" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                                  Margin="0,0,16,0"/>
+            <HyperlinkButton Content="more" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                         Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="16,-16,0,0"/>
+
+        </Grid>
+    </ScrollViewer>
 </Page>

@@ -26,21 +26,40 @@ namespace JISoft.Controls
         public HTMLViewer()
         {
             InitializeComponent();
-            //var hor = new Binding();
-            //hor.Path = new PropertyPath("HorizontalScrollBarVisibility");
-            //hor.Mode = BindingMode.TwoWay;
-            //hor.Source = Scroll;
-            //SetBinding(HorizontalScrollBarVisibilityProperty, hor);
-            //var ver = new Binding();
-            //ver.Path = new PropertyPath("VerticalScrollBarVisibility");
-            //ver.Mode = BindingMode.TwoWay;
-            //ver.Source = Scroll;
-            //SetBinding(VerticalScrollBarVisibilityProperty, ver);
         }
 
         public static readonly DependencyProperty VerticalScrollBarVisibilityProperty = ScrollViewer.VerticalScrollBarVisibilityProperty;
         public static readonly DependencyProperty HorizontalScrollBarVisibilityProperty = ScrollViewer.HorizontalScrollBarVisibilityProperty;
 
+        public int MaxLines
+        {
+            get { return (int)GetValue(MaxLinesProperty); }
+            set { SetValue(MaxLinesProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MaxLines.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxLinesProperty =
+            DependencyProperty.Register("MaxLines", typeof(int), typeof(HTMLViewer), new PropertyMetadata(0));
+
+        public TextWrapping TextWrapping
+        {
+            get { return (TextWrapping)GetValue(TextWrappingProperty); }
+            set { SetValue(TextWrappingProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextWrapping.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextWrappingProperty =
+            DependencyProperty.Register("TextWrapping", typeof(TextWrapping), typeof(HTMLViewer), new PropertyMetadata(TextWrapping.Wrap));
+
+
+        public TextTrimming TextTrimming
+        {
+            get { return (TextTrimming)GetValue(TextTrimmingProperty); }
+            set { SetValue(TextTrimmingProperty, value); }
+        }
+        // Using a DependencyProperty as the backing store for TextTrimming.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextTrimmingProperty =
+            DependencyProperty.Register("TextTrimming", typeof(TextTrimming), typeof(HTMLViewer), new PropertyMetadata(TextTrimming.None));
 
 
         [System.ComponentModel.DefaultValue("")]
@@ -78,6 +97,7 @@ namespace JISoft.Controls
                  {
                      lock (lockObj)
                      {
+                         
                          var xamlXml = HtmlToXamlConverter.ConvertHtmlToXamlInternal(newVal, false);
                          devideParagraphs(xamlXml);
                          foreach (var hyperlink in xamlXml.Descendants(XName.Get(HtmlToXamlConverter.Xaml_Hyperlink, HtmlToXamlConverter._xamlNamespace)))
@@ -92,7 +112,6 @@ namespace JISoft.Controls
                          {
                              try
                              {
-
                                  String s = "<RichTextBlock xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\">\n" + xamlXml
                                      + "</RichTextBlock>\n";
 
@@ -100,16 +119,8 @@ namespace JISoft.Controls
                                  RichTextBlock rtb = XamlReader.Load(s) as RichTextBlock;
                                  rtb.HorizontalAlignment = this.HorizontalContentAlignment;
                                  rtb.VerticalAlignment = this.VerticalContentAlignment;
+                                 SetBindings(ref rtb);
                                  Scroll.Children.Clear();
-                                 //Scroll.ChangeView(0, 0, 1);
-                                 Binding b = new Binding();
-                                 b.Path = new PropertyPath("FontSize");
-                                 b.Source = this;
-                                 rtb.SetBinding(RichTextBlock.FontSizeProperty, b);
-                                 b = new Binding();
-                                 b.Path = new PropertyPath("Foreground");
-                                 b.Source = this;
-                                 rtb.SetBinding(RichTextBlock.ForegroundProperty, b);
                                  Scroll.Children.Add(rtb);
                                  if (rtb.Blocks != null)
                                  {
@@ -171,7 +182,6 @@ namespace JISoft.Controls
                 section.Remove();
             }
         }
-
 
         // no event can by added in xamlParser
         void postParseInlinesSettings(InlineCollection collection)
@@ -297,5 +307,31 @@ namespace JISoft.Controls
             DependencyProperty.Register("HyperlinksForeground", typeof(Brush), typeof(HTMLViewer), new PropertyMetadata(new SolidColorBrush()));
 
 
+        private void SetBindings(ref RichTextBlock rtb)
+        {
+            Binding textWrapBinding = new Binding();
+            textWrapBinding.Path = new PropertyPath("TextWrapping");
+            textWrapBinding.Source = this;
+            rtb.SetBinding(RichTextBlock.TextWrappingProperty, textWrapBinding);
+
+            Binding textTrimmingBinding = new Binding();
+            textTrimmingBinding.Path = new PropertyPath("TextTrimming");
+            textTrimmingBinding.Source = this;
+            rtb.SetBinding(RichTextBlock.TextTrimmingProperty, textTrimmingBinding);
+
+            Binding maxLineBinding = new Binding();
+            maxLineBinding.Path = new PropertyPath("MaxLines");
+            maxLineBinding.Source = this;
+            rtb.SetBinding(RichTextBlock.MaxLinesProperty, maxLineBinding);
+
+            Binding b = new Binding();
+            b.Path = new PropertyPath("FontSize");
+            b.Source = this;
+            rtb.SetBinding(RichTextBlock.FontSizeProperty, b);
+            b = new Binding();
+            b.Path = new PropertyPath("Foreground");
+            b.Source = this;
+            rtb.SetBinding(RichTextBlock.ForegroundProperty, b);
+        }
     }
 }
