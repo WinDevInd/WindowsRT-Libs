@@ -5,6 +5,7 @@
 //-------------------------------------------------------------------------------------------------
 namespace JISoft.Controls
 {
+    using PowerToolKit.CustomCollections;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -191,8 +192,8 @@ namespace JISoft.Controls
                 if (this.ItemsSource != null && CanIncrementalLoadigTrigger())
                 {
                     IsBusy = true;
-                    ISupportIncrementalLoading incrementalLoadingInterface = this.ItemsSource as ISupportIncrementalLoading;
-                    if (incrementalLoadingInterface != null)
+                    ISupportIncrementalLoadingExtended incrementalLoadingInterface = this.ItemsSource as ISupportIncrementalLoadingExtended;
+                    if (incrementalLoadingInterface != null && !incrementalLoadingInterface.IsBusy)
                     {
                         if (incrementalLoadingInterface.HasMoreItems)
                         {

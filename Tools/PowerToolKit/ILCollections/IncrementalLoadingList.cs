@@ -6,6 +6,7 @@
 namespace JISoft.Collections.ILCollections
 {
     using JISoft.Collections.CustomCollections;
+    using PowerToolKit.CustomCollections;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace JISoft.Collections.ILCollections
     /// ObservableCollection with Incremental loading support
     /// </summary>
     /// <typeparam name="T">Expecting type</typeparam>
-    public abstract class IncrementalLoadingList<T> : ObservableList<T>, ISupportIncrementalLoading
+    public abstract class IncrementalLoadingList<T> : ObservableList<T>, ISupportIncrementalLoadingExtended
     {
         /// <summary>
         /// Indicating whether thread is busy operation.
@@ -37,6 +38,14 @@ namespace JISoft.Collections.ILCollections
         public bool HasMoreItems
         {
             get { return this.CanLoadMoreItems(); }
+        }
+
+        public bool IsBusy
+        {
+            get
+            {
+                return isBusy;
+            }
         }
 
         /// <summary>

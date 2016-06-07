@@ -23,6 +23,7 @@ namespace JISoft.Controls
     public partial class HTMLViewer : UserControl
     {
         private object lockObj = new object();
+        private RichTextBlock rtb;
         public HTMLViewer()
         {
             InitializeComponent();
@@ -62,6 +63,28 @@ namespace JISoft.Controls
             DependencyProperty.Register("TextTrimming", typeof(TextTrimming), typeof(HTMLViewer), new PropertyMetadata(TextTrimming.None));
 
 
+        public RichTextBlockOverflow OverFlowTarget
+        {
+            get { return (RichTextBlockOverflow)GetValue(OverFlowTargetProperty); }
+            set { SetValue(OverFlowTargetProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for OverFlowTarget.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OverFlowTargetProperty =
+            DependencyProperty.Register("OverFlowTarget", typeof(RichTextBlockOverflow), typeof(HTMLViewer), new PropertyMetadata(null));
+
+        public bool HasOverFlowContent
+        {
+            get { return (bool)GetValue(HasOverFlowContentProperty); }
+            set { SetValue(HasOverFlowContentProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for HasOverFlowContent.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HasOverFlowContentProperty =
+            DependencyProperty.Register("HasOverFlowContent", typeof(bool), typeof(HTMLViewer), new PropertyMetadata(false));
+
+
+
         [System.ComponentModel.DefaultValue("")]
         public string Html
         {
@@ -97,7 +120,7 @@ namespace JISoft.Controls
                  {
                      lock (lockObj)
                      {
-                         
+
                          var xamlXml = HtmlToXamlConverter.ConvertHtmlToXamlInternal(newVal, false);
                          devideParagraphs(xamlXml);
                          foreach (var hyperlink in xamlXml.Descendants(XName.Get(HtmlToXamlConverter.Xaml_Hyperlink, HtmlToXamlConverter._xamlNamespace)))
@@ -116,7 +139,7 @@ namespace JISoft.Controls
                                      + "</RichTextBlock>\n";
 
                                  //var section = XamlReader.Load(xamlXml.ToString()) as Windows.UI.Xaml.Documents.BlockCollection;
-                                 RichTextBlock rtb = XamlReader.Load(s) as RichTextBlock;
+                                 rtb = XamlReader.Load(s) as RichTextBlock;
                                  rtb.HorizontalAlignment = this.HorizontalContentAlignment;
                                  rtb.VerticalAlignment = this.VerticalContentAlignment;
                                  SetBindings(ref rtb);
@@ -134,7 +157,7 @@ namespace JISoft.Controls
                                      }
                                  }
                              }
-                             catch
+                             catch(Exception ex)
                              {
 
                              }
@@ -328,10 +351,16 @@ namespace JISoft.Controls
             b.Path = new PropertyPath("FontSize");
             b.Source = this;
             rtb.SetBinding(RichTextBlock.FontSizeProperty, b);
-            b = new Binding();
-            b.Path = new PropertyPath("Foreground");
-            b.Source = this;
-            rtb.SetBinding(RichTextBlock.ForegroundProperty, b);
+
+            Binding foreGroundProperty = new Binding();
+            foreGroundProperty.Path = new PropertyPath("Foreground");
+            foreGroundProperty.Source = this;
+            rtb.SetBinding(RichTextBlock.ForegroundProperty, foreGroundProperty);
+
+            Binding contentOverFlowTarget = new Binding();
+            contentOverFlowTarget.Path = new PropertyPath("OverFlowTarget");
+            contentOverFlowTarget.Source = this;
+            rtb.SetBinding(RichTextBlock.OverflowContentTargetProperty, contentOverFlowTarget);
         }
     }
 }
